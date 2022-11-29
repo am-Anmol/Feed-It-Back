@@ -1,7 +1,8 @@
+DROP SCHEMA IF EXISTS fib;
 create database fib;
 use fib;
 
-create table Adminis (
+create table Admins (
 admin_id int primary key auto_increment,
 admin_name varchar(255),
 email varchar(255),
@@ -45,7 +46,8 @@ f_status varchar(255),
 pickup_location varchar(255),
 created_time datetime,
 duration_time datetime,
-d_id int 
+d_id int,
+foreign key (d_id) references donor(donor_id) 
 );
 
 
@@ -57,8 +59,7 @@ fd_cat varchar(255),
 fd_status varchar(255),
 fd_pickUp datetime,
 fd_duration datetime,
-d_id int,
-foreign key (d_id) references donor(donor_id)
+d_id int
 );
 
 
@@ -78,3 +79,32 @@ FOREIGN KEY (volunteerId) REFERENCES volunteer(volunteer_id)
 );
 
 
+create table users(
+Username varchar(255),
+email varchar(255),
+passwd varchar(255),
+userType varchar(255));
+
+delimiter //
+create trigger donorUser after insert on donor
+for each row 
+ insert users values(new.name,new.email,new.dn_password,'donor');//
+delimiter ;
+
+delimiter //
+create trigger volUser after insert on volunteer
+for each row 
+ insert users values(new.v_name,new.email,new.vl_password,'volunteer');//
+delimiter ;
+
+delimiter //
+create trigger admUser after insert on admins
+for each row 
+ insert users values(new.admin_name,new.email,new.ad.password,'admin');//
+delimiter ;
+
+delimiter //
+create trigger bckFoodDel before delete on food_added
+for each row 
+ insert food_del values(old.foodid,old.food_qty,old.food_cat,old.f_status,old.pickup_location,old.created_time,old.duration_time,old.d_id);//
+delimiter ;
