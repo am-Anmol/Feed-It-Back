@@ -32,4 +32,8 @@ def vregister():
 def login():
     return render_template('login.html')
 
+@app.route("/history")
+def history():
+    return render_template('history.html')
+
 app.run(debug=True)
