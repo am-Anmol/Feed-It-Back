@@ -77,9 +77,17 @@
     }  
     </style>
 <div class="signup-form">
-    <form action="" method="POST">
+    
+    <form action="/donorRegister" method="POST">
 		<h2>Register as Donor</h2>
 		<p class="hint-text">Create your account. It's free and only takes a minute.</p>
+        {% with messages = get_flashed_messages() %}
+		    {% if messages %}
+    	    <div class=" hint-text text-danger">
+        	    {{ messages[0] }}
+    	    </div>
+		    {% endif %}
+		{% endwith %}
         <div class="form-group">
         	<input type="text" class="form-control" name="full_name" placeholder="Enter Full Name" required="required">
         </div>
