@@ -69,4 +69,8 @@ def vregister():
 def login():
     return render_template('login.html')
 
+@app.route("/foodhistory")
+def fhistory():
+    return render_template('foodhistory.html')
+
 app.run(debug=True)
