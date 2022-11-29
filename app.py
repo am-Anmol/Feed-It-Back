@@ -41,7 +41,7 @@ def donor_reg():
     
 
     if account:
-        flash('This is a flash message')
+        flash('Account exists')
         return redirect(url_for("dregister"))
     elif len(phoneno) != 10:
         print("IN")
@@ -64,6 +64,39 @@ def donor_reg():
 @app.route("/volunteerRegister")
 def vregister():
     return render_template('volunteerRegister.html')
+
+@app.route("/volunteerRegister", methods = ["POST"])
+def volunteer_reg():
+    
+    fullname = request.form['full_name']
+    phoneno = request.form['phoneno']
+    location = request.form['location']
+    email = request.form['email']
+    password = request.form['password']
+    cnf_password = request.form['confirm_password']
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM volunteer WHERE email = % s', (email, ))
+    account = cursor.fetchone()
+    
+
+    if account:
+        flash('Account Exists')
+        return redirect(url_for("vregister"))
+    elif len(phoneno) != 10:
+        flash("Please enter a valid phone number")
+        return redirect(url_for("vregister"))
+    elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+        flash("Please enter a valid email")
+        return redirect(url_for("vregister"))
+    elif password != cnf_password:
+        flash("Password don't Match")
+        return redirect(url_for("vregister"))
+    else:
+        cursor.execute('INSERT INTO volunteer(v_name, v_location, v_contact_number, email, vl_password) VALUES (%s, %s, %s, %s, %s)', 
+                (fullname, location, phoneno, email, password))
+        mysql.connection.commit()
+        #flash = 'You have successfully registered !'
+        return redirect(url_for("login"))
 
 @app.route("/login")
 def login():
