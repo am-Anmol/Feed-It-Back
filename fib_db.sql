@@ -13,7 +13,9 @@ create table donor (
 donor_id int primary key auto_increment,
 name varchar(255),
 d_location varchar(255),
-d_contact_number int(10)
+d_contact_number int(10),
+email varchar(255),
+dn_password varchar(255)
 );
 
 
@@ -22,7 +24,9 @@ create table volunteer (
 volunteer_id int primary key auto_increment,
 v_name varchar(255),
 v_location varchar(255),
-v_contact_number int(10)
+v_contact_number int(10),
+email varchar(255),
+vl_password varchar(255)
 );
 
 
