@@ -14,7 +14,7 @@ create table donor (
 donor_id int primary key auto_increment,
 name varchar(255),
 d_location varchar(255),
-d_contact_number int(10),
+d_contact_number bigint(10),
 email varchar(255),
 dn_password varchar(255)
 );
@@ -25,7 +25,7 @@ create table volunteer (
 volunteer_id int primary key auto_increment,
 v_name varchar(255),
 v_location varchar(255),
-v_contact_number int(10),
+v_contact_number bigint(10),
 email varchar(255),
 vl_password varchar(255)
 );
@@ -34,7 +34,7 @@ vl_password varchar(255)
 create table reciever (
 reciever_id int primary key auto_increment,
 r_address varchar(255),
-r_contact_number int(10)
+r_contact_number bigint(10)
 );
 
 
@@ -108,3 +108,4 @@ create trigger bckFoodDel before delete on food_added
 for each row 
  insert food_del values(old.foodid,old.food_qty,old.food_cat,old.f_status,old.pickup_location,old.created_time,old.duration_time,old.d_id);//
 delimiter ;
+
