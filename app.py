@@ -1,5 +1,6 @@
 from flask import *
 from flask_mysqldb import MySQL
+import MySQLdb.cursors
 import re
 
 app=Flask(__name__,static_url_path='/static')
@@ -7,7 +8,7 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
-app.config['MYSQL_PASSWORD'] = 'G@nesh24'#password
+app.config['MYSQL_PASSWORD'] = '1234'#password G@nesh24
 
 app.config['MYSQL_DB'] = 'fib'#database name
 
@@ -98,8 +99,36 @@ def volunteer_reg():
         #flash = 'You have successfully registered !'
         return redirect(url_for("login"))
 
-@app.route("/login")
+@app.route('/logged', methods=['GET', 'POST'])
 def login():
+    msg = ''
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        print(email, password)
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM users WHERE email = % s AND passwd = % s', (email, password))
+        account = cursor.fetchone()
+        if account:
+            session['email'] = account['email']
+            session['type']=account ['userType']
+            msg = 'Logged in successfully !'
+            return session['email'] +' '+ session['type']
+            #return render_template('userpage.html', email=email, msg=msg) this is to be removefrom comment and add dashboards 
+
+        else:
+
+            msg = 'Incorrect username / password !'
+    return render_template('login.html', msg=msg)
+
+@app.route('/logout')
+def logout():
+    session.pop('email', None)
+    session.pop('type', None)
+    return redirect(url_for('login'))
+
+@app.route("/login")
+def lgn():
     return render_template('login.html')
 
 @app.route("/foodhistory")
