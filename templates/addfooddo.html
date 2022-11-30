@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!-- Css Link -->
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <style>
+     
+     label {
+        display: inline-block;
+        width: 150px;
+        text-align: justify;
+        text-align: left;
+        margin-right: 30px;
+        margin-left: 28%;
+        margin-bottom: 10px;
+        color:black;
+        font-weight: bolder;
+      }
+      input{
+        width: 30%;
+      }
+      
+
+      .home-content{
+        background-image:url(https://media.istockphoto.com/id/1298626388/photo/e-donation-concept.jpg?b=1&s=170667a&w=0&k=20&c=nV8E3Q5JSS02dJkwJzCmZebKsubQfZgnzLJ69Q3oUwM=);
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 100vh;
+      }
+     
+    </style>
+<body>
+
+  <!-- side-navbar Starts -->
+
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxs-donate-heart'></i>
+      <a href="homedo.html"><span class="logo_name">Feed-It-Back</span></a>
+    </div>
+      <ul class="nav-links">
+        <li>
+          <a href="./dashdo.html" class="active">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="addfooddo.html">
+            <i class='bx bx-box' ></i>
+            <span class="links_name">Add Food Details</span>
+          </a>
+        </li>
+        <li>
+          <a href="managefooddo.html">
+            <i class='bx bx-list-ul' ></i>
+            <span class="links_name">Manage Food List</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-pie-chart-alt-2' ></i>
+            <span class="links_name">Logout</span>
+          </a>
+        </li>
+       
+      </ul>
+  </div>
+
+  <!-- main section --> 
+  <section class="home-section">
+    
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+    
+    </nav>
+
+    <!-- form starts -->
+
+    <div class="home-content">
+        <h1 style="text-align: center;background-color: rgb(29, 29, 177);color: antiquewhite;">LIST YOUR FOOD DETAILS</h1><br><br>
+        <form action="">
+            <label for="food">Food Items</label>
+            <input type="text" id="food" name="food"><br>
+
+            <label for="foodq">Food Quantity</label>
+            <input type="text" id="foodq" name="foodq"><br>
+
+            <label for="foodc">Category</label>
+            <input type="text" id="foodc" name="foodc"><br>
+
+            <label for="desp">Description</label>
+            <textarea rows="2" cols="30"></textarea><br>
+
+            <label for="date">Pickup Date</label>
+            <input type="date" id="date" name="date"><br>
+
+            <label for="appt">Pickup Time</label>
+            <input type="time" id="appt" name="appt"><br>
+
+            <label for="pickup">Pickup Address</label>
+            <textarea rows="2" cols="30"></textarea><br>
+          
+            <label for="state">State</label>
+            <input type="text" id="state" name="state"><br>
+
+            <label for="city">City</label>
+            <input type="text" id="city" name="city"><br>
+
+            <label for="person">Contact Person</label>
+            <input type="text" id="person" name="person"><br >
+
+            <label for="mobile">Mobile Number</label>
+            <input type="number" id="mobile" name="mobile"><br />
+
+            <div class="text-center">
+              <button type="button" class="btn btn-success" style="margin-top: 20px;width: 20%;">Donate!!!</button>
+             
+            </div>
+
+           
+            
+        </div>
+        
+       
+  </section>
+
+    <!-- side-navbar js -->
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
+
