@@ -113,7 +113,10 @@ def login():
             session['email'] = account['email']
             session['type']=account ['userType']
             msg = 'Logged in successfully !'
-            return session['email'] +' '+ session['type']
+            if session['type'] == 'donor':
+                return redirect('/donorhome')
+            else:
+                return session['email'] +' '+ session['type']
             #return render_template('userpage.html', email=email, msg=msg) this is to be removefrom comment and add dashboards 
 
         else:
@@ -134,5 +137,14 @@ def lgn():
 @app.route("/foodhistory")
 def fhistory():
     return render_template('foodhistory.html')
+
+
+@app.route("/donorhome")
+def dhome():
+    return render_template('homedo.html')
+
+@app.route("/donordashboard")
+def donordashboard():
+    return render_template('dashdo.html')
 
 app.run(debug=True)
