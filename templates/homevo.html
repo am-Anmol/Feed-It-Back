@@ -1,5 +1,5 @@
-{% extends 'common.html' %}
-{% block content %}
+<!-- {% extends 'common.html' %}
+{% block content %} -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +12,9 @@
     <!-- Fontawesome Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- CSS Link -->
-    <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/homedo.css') }}">
-    <title>Donor Home</title>
+    <!-- <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/homedo.css') }}"> -->
+    <link rel="stylesheet" type="text/css" href="../static/styles/homedo.css">
+    <title>Volunteer home</title>
 </head>
 
 <body>
@@ -77,11 +78,11 @@
    <!--section-five starts-->
 
    <section id="section-five">
-      <div class="section-five1"><b>BECOME DONOR</b></div>
-      <h1><b>Best Way To Help Others</b></h1>
+      <div class="section-five1"><b>BECOME VOLUNTEER</b></div>
+      <h1><b>One of the greatest gifts you can give is your time</b></h1>
       <p>The message of The Faithland is that Christ saves sinners. In light of<br>
               that, we steward a message that radically changes lives.</p>
-      <a href="/donordashboard"><b>GET DONATE NOW!</b></a>
+      <a href="./dashvo.html"><b>Become Volunteer</b></a>
    
     </section>
 
@@ -182,4 +183,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>       
 </body>
 </html>
-{% endblock %}
+<!-- {% endblock %} -->
