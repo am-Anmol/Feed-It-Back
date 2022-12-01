@@ -18,7 +18,12 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
+      {% if not session['type']: %}
       <a class="navbar-brand" href="/">Feed It Back</a>
+      {% endif %}
+      {% if session['type'] == 'donor':  %}
+      <a class="navbar-brand" href="/donorhome">Feed It Back</a>
+      {% endif %}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,24 +32,35 @@
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="/aboutus">About us</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Join Us
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/donorRegister">As a Donor</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="/volunteerRegister">As a Volunteer</a></li>
-                </ul>
+            {% if not session['email']: %}
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Join Us
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/donorRegister">As a Donor</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/volunteerRegister">As a Volunteer</a></li>
+                  </ul>
               </li>
               <li class="nav-item">
                 <a  class="nav-link" href="/login">Login</a>
               </li>
+            {% endif %}
+            {% if session['type'] == 'donor': %}
+            <li class="nav-item">
+              <a  class="nav-link" href="/donordashboard">Donate Food</a>
+            </li>
+            {% endif %}
+            {% if session['email']: %}
+              <li class="nav-item">
+                <a  class="nav-link" href="/logout">Logout</a>
+              </li>
+            {% endif %}
           </ul>
         </div>
     </div>
   </nav>
-  <br>
   {% block content %}
         
   {% endblock %}
