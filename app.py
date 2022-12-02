@@ -147,4 +147,12 @@ def dhome():
 def donordashboard():
     return render_template('dashdo.html')
 
+@app.route("/managefooddonor")
+def donormanage():
+    return render_template('managefooddo.html')
+
+@app.route("/addfood")
+def addfood():
+    return render_template('addfooddo.html')
+
 app.run(debug=True)
