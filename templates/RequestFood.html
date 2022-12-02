@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
- <link rel="stylesheet" href="./css/dashboard.css">
+ <link rel="stylesheet" href="../static/styles/dashboard.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -102,7 +102,7 @@ table.table td .add {
     <div class="sidebar">
         <div class="logo-details">
           <i class='bx bxs-donate-heart'></i>
-          <a href="homedo.html"><span class="logo_name">Feed-It-Back</span></a>
+          <a href="homevo.html"><span class="logo_name">Feed-It-Back</span></a>
         </div>
           <ul class="nav-links">
             <li>
@@ -112,15 +112,9 @@ table.table td .add {
               </a>
             </li>
             <li>
-              <a href="addfooddo.html">
+              <a href="RequestFood.html">
                 <i class='bx bx-box' ></i>
-                <span class="links_name">Add Food Details</span>
-              </a>
-            </li>
-            <li>
-              <a href="managefooddo.html">
-                <i class='bx bx-list-ul' ></i>
-                <span class="links_name">Manage Food List</span>
+                <span class="links_name">Request Food</span>
               </a>
             </li>
             <li>
@@ -135,6 +129,7 @@ table.table td .add {
                 <span class="links_name">Log out</span>
               </a>
             </li>
+           
           </ul>
       </div>
       <section class="home-section">
@@ -171,7 +166,7 @@ table.table td .add {
                         <th>Mobile Number</th>
                         <th>Listing Date</th>
                         <th>Listing Time</th>
-                        <th>Actions</th>
+                        <th>Make Request</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -188,9 +183,8 @@ table.table td .add {
                         <td>11:00</td>
 
                         <td>
-                           
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                            <a href="#" style="color: red;font-weight:bold">REQUEST</a>
+                            
                         </td>
                     </tr>
                   
