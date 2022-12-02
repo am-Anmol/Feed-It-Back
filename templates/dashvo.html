@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <!-- CSS Link -->
     <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/dashboard.css') }}">
+    <link rel="stylesheet" type= "text/css" href="../static/styles/dashboard.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,43 +23,38 @@
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bxs-donate-heart'></i>
-      <a href="homedo.html"><span class="logo_name">Feed-It-Back</span></a>
+      <a href="homevo.html"><span class="logo_name">Feed-It-Back</span></a>
     </div>
       <ul class="nav-links">
 
         <li>
-          <a href="./css/dashboard.css" class="active">
+          <a href="/volunteerdashboard" class="active">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Dashboard</span>
           </a>
         </li>
 
         <li>
-          <a href="/addfood">
+          <a href="/requestfood">
             <i class='bx bx-box' ></i>
-            <span class="links_name">Add Food Details</span>
+            <span class="links_name">Request Food</span>
           </a>
         </li>
 
         <li>
-          <a href="managefooddonor">
-            <i class='bx bx-list-ul' ></i>
-            <span class="links_name">Manage Food List</span>
-          </a>
-        </li>
+            <a href="/volunteerhome">
+              <i class='bx bx-arrow-back'></i>
+              <span class="links_name">Back</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-pie-chart-alt-2' ></i>
+              <span class="links_name">Log out</span>
+            </a>
+          </li>
 
-        <li>
-          <a href="dashvo.html">
-            <i class='bx bx-arrow-back'></i>
-            <span class="links_name">Back</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-pie-chart-alt-2' ></i>
-            <span class="links_name">Log out</span>
-          </a>
-        </li>
+       
        
       </ul>
   </div>

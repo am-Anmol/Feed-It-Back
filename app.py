@@ -115,9 +115,11 @@ def login():
             msg = 'Logged in successfully !'
             if session['type'] == 'donor':
                 return redirect('/donorhome')
+            elif session['type'] == 'volunteer':
+                return redirect('/volunteerhome')
             else:
-                return session['email'] +' '+ session['type']
-            #return render_template('userpage.html', email=email, msg=msg) this is to be removefrom comment and add dashboards 
+                return session['email'] +' '+ session['type'] 
+            #admin dashboard left
 
         else:
 
@@ -146,5 +148,25 @@ def dhome():
 @app.route("/donordashboard")
 def donordashboard():
     return render_template('dashdo.html')
+
+@app.route("/managefooddonor")
+def donormanage():
+    return render_template('managefooddo.html')
+
+@app.route("/addfood")
+def addfood():
+    return render_template('addfooddo.html')
+
+@app.route("/volunteerhome")
+def vhome():
+    return render_template('homevo.html')
+
+@app.route("/volunteerdashboard")
+def volunteerdashboard():
+    return render_template('dashvo.html')
+
+@app.route("/requestfood")
+def requestfood():
+    return render_template('RequestFood.html')
 
 app.run(debug=True)
