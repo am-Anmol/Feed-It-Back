@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!-- CSS Link -->
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/dashboard.css') }}">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <style>
+    .home-section{
+        background-image: url(https://media.istockphoto.com/id/1333790678/photo/close-up-of-a-young-woman-carrying-a-box-of-food-donations.jpg?b=1&s=170667a&w=0&k=20&c=Rsp8H9azqBzWd6e3yR-E_ALXlGlEhrvKTR1n6mLkcuo=);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+   </style>
+<body>
+
+   <!-- side-navbar Starts -->
+
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxs-donate-heart'></i>
+      <a href="homeadmin.html"><span class="logo_name">Feed-It-Back</span></a>
+    </div>
+      <ul class="nav-links">
+
+        <li>
+          <a href="./css/dashboard.css" class="active">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/view_donors">
+            <i class='bx bx-restaurant' ></i>
+            <span class="links_name">View Donors 🥡 </span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/view_volunteers">
+            <i class='bx bx-male' ></i>
+            <span class="links_name">View Volunteers 🧍</span>
+          </a>
+        </li>
+
+        <li>
+            <a href="/foodhistory">
+              <i class='bx bx-box' ></i>
+              <span class="links_name">View Delivery-History 🚚 </span>
+            </a>
+        </li>
+
+        <li>
+          <a href="dashadmin.html">
+            <i class='bx bx-arrow-back'></i>
+            <span class="links_name">Back</span>
+          </a>
+        </li>
+        <li>
+          <a href="/logout">
+            <i class='bx bx-pie-chart-alt-2' ></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+       
+      </ul>
+  </div>
+
+ <!-- nav ends -->
+
+
+  <!-- main section starts -->
+  <section class="home-section">
+
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+    
+    </nav>
+
+    <div class="home-content">
+      <div class="overview-boxes">
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">Total Volunteer</div>
+            <div class="number">2000</div>
+            
+          </div>
+          <i class='bx bx-cart-alt cart'></i>
+          
+        </div>
+        
+       
+  </section>
+
+
+  <!-- Js part for side-navbar -->
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
+

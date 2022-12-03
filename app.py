@@ -169,4 +169,28 @@ def volunteerdashboard():
 def requestfood():
     return render_template('RequestFood.html')
 
+@app.route("/adminhome")
+def ahome():
+    return render_template('homeadmin.html')
+
+@app.route("/dashadmin")
+def admindashboard():
+    return render_template('dashadmin.html')
+
+@app.route("/view_donors", methods=['GET', 'POST'])
+def viewdonors():
+    cur=mysql.connection.cursor()
+    cur.execute('select * from donor')
+    all_donors=cur.fetchall()
+    cur.close()
+    return render_template('view_donors.html',all_donors=all_donors)
+
+@app.route("/view_volunteers", methods=['GET', 'POST'])
+def viewvols():
+    cur=mysql.connection.cursor()
+    cur.execute('select * from volunteer')
+    all_volunteers=cur.fetchall()
+    cur.close()
+    return render_template('view_volunteers.html',all_volunteers=all_volunteers)
+
 app.run(debug=True)
