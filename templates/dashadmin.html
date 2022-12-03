@@ -35,31 +35,61 @@
 
         <li>
           <a href="/view_donors">
+            <i class='bx bx-donate-heart' ></i>
+            <span class="links_name">View Donors </span>
+          </a>
+        </li>
+
+        
+        <li>
+          <a href="/view_volunteers">
+            <i class='bx bx-male' ></i>
+            <span class="links_name">View Volunteers</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="/view_foodavailable">
             <i class='bx bx-restaurant' ></i>
-            <span class="links_name">View Donors 🥡 </span>
+            <span class="links_name">Food Available </span>
           </a>
         </li>
 
         <li>
-          <a href="/view_volunteers">
-            <i class='bx bx-male' ></i>
-            <span class="links_name">View Volunteers 🧍</span>
+          <a href="/view_foodrequested">
+            <i class='bx bx-restaurant'></i>
+            <span class="links_name">Requested Food </span>
           </a>
         </li>
 
         <li>
             <a href="/foodhistory">
               <i class='bx bx-box' ></i>
-              <span class="links_name">View Delivery-History 🚚 </span>
+              <span class="links_name">View Delivery-History </span>
             </a>
         </li>
 
+        <li>
+          <a href="/add_receiver">
+            <i class='bx bx-book-add'></i>
+            <span class="links_name">Add Receiver</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/view_receivers">
+            <i class='bx bx-book-content'></i>
+            <span class="links_name">View Receivers</span>
+          </a>
+        </li>
+      
         <li>
           <a href="/adminhome">
             <i class='bx bx-arrow-back'></i>
             <span class="links_name">Back</span>
           </a>
         </li>
+
         <li>
           <a href="/logout">
             <i class='bx bx-pie-chart-alt-2' ></i>
@@ -83,19 +113,28 @@
       </div>
     
     </nav>
-
+    {% block content %}
     <div class="home-content">
       <div class="overview-boxes">
         <div class="box">
           <div class="right-side">
-            <div class="box-topic">Total Volunteer</div>
-            <div class="number">2000</div>
+            <div class="box-topic">Total Donors</div>
+            <div class="number">{{no_donors}}</div>
             
           </div>
           <i class='bx bx-cart-alt cart'></i>
           
         </div>
         
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">Total Volunteers</div>
+            <div class="number">{{no_volunteers}}</div>
+          </div>
+          <i class='bx bx-cart-alt cart'></i>
+          
+        </div>
+      {% endblock %}
        
   </section>
 

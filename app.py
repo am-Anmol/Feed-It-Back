@@ -8,7 +8,7 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
-app.config['MYSQL_PASSWORD'] = '1234'#password G@nesh24
+app.config['MYSQL_PASSWORD'] = 'Raghu@2000'#password G@nesh24
 
 app.config['MYSQL_DB'] = 'fib'#database name
 
@@ -173,9 +173,15 @@ def requestfood():
 def ahome():
     return render_template('homeadmin.html')
 
-@app.route("/dashadmin")
+@app.route("/dashadmin", methods=['GET', 'POST'])
 def admindashboard():
-    return render_template('dashadmin.html')
+    cur=mysql.connection.cursor()
+    cur.execute('select count(*) from donor')
+    no_donors=cur.fetchall()
+    cur.execute('select count(*) from volunteer')
+    no_volunteers=cur.fetchall()
+    cur.close()
+    return render_template('dashadmin.html',no_donors=no_donors, no_volunteers=no_volunteers)
 
 @app.route("/view_donors", methods=['GET', 'POST'])
 def viewdonors():
@@ -192,5 +198,49 @@ def viewvols():
     all_volunteers=cur.fetchall()
     cur.close()
     return render_template('view_volunteers.html',all_volunteers=all_volunteers)
+
+@app.route("/view_foodavailable", methods=['GET', 'POST'])
+def view_foodavailable():
+    cur=mysql.connection.cursor()
+    cur.execute('select * from food_added')
+    food_available=cur.fetchall()
+    cur.close()
+    return render_template('view_foodavailable.html',food_available=food_available)
+
+@app.route("/view_foodrequested", methods=['GET', 'POST'])
+def view_requests():
+    cur=mysql.connection.cursor()
+    cur.execute('select * from volunteer_request')
+    food_requests=cur.fetchall()
+    cur.close()
+    return render_template('view_foodrequested.html',food_requests=food_requests)
+
+@app.route("/add_receiver")
+def add_rec():
+    return render_template('add_receiver.html')
+
+@app.route("/add_receiver", methods = ["POST"])
+def add_receiver():
+    
+    address = request.form['r_address']
+    phoneno = request.form['r_contact_number']
+    cursor=mysql.connection.cursor()
+    if len(phoneno) != 10:
+        flash("Please enter a valid phone number")
+        return redirect(url_for("add_rec"))
+    else:
+        cursor.execute('INSERT INTO reciever(r_address, r_contact_number) VALUES (%s, %s)', 
+                (address, phoneno))
+        mysql.connection.commit()
+        #flash = 'Receiver Successfully Added !'
+        return redirect(url_for("admindashboard"))
+
+@app.route("/view_receivers", methods=['GET'])
+def viewreceivers():
+    cur=mysql.connection.cursor()
+    cur.execute('select * from reciever')
+    receiver=cur.fetchall()
+    cur.close()
+    return render_template('view_receivers.html',receiver=receiver)
 
 app.run(debug=True)
