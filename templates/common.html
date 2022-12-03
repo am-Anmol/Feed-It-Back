@@ -27,6 +27,9 @@
       {% if session['type'] == 'volunteer':  %}
       <a class="navbar-brand" href="/volunteerhome">Feed It Back</a>
       {% endif %}
+      {% if session['type'] == 'admin':  %}
+      <a class="navbar-brand" href="/adminhome">Feed It Back</a>
+      {% endif %}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -58,6 +61,11 @@
             {% if session['type'] == 'volunteer': %}
             <li class="nav-item">
               <a  class="nav-link" href="/volunteerdashboard">Dashboard</a>
+            </li>
+            {% endif %}
+            {% if session['type'] == 'admin': %}
+            <li class="nav-item">
+              <a  class="nav-link" href="/dashadmin">Dashboard</a>
             </li>
             {% endif %}
             {% if session['email']: %}
