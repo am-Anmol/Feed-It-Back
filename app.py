@@ -117,12 +117,12 @@ def login():
                 return redirect('/donorhome')
             elif session['type'] == 'volunteer':
                 return redirect('/volunteerhome')
+            elif session['type'] == 'admin':
+                return redirect('/adminhome')
             else:
-                return session['email'] +' '+ session['type'] 
-            #admin dashboard left
+                return 'You do not belong to our page'
 
         else:
-
             msg = 'Incorrect username / password !'
     return render_template('login.html', msg=msg)
 
