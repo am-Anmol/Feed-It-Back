@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor list</title>
+</head>
+{% block content %}
+<body>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Donor_ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Phone_Number</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in donor %}
+            <tr>
+                <td>{{row}}</td>
+                
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</body>
+{%endblock%}
+</html>
