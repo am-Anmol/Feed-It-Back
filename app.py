@@ -8,7 +8,9 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
+
 app.config['MYSQL_PASSWORD'] = 'G@nesh24'#password G@nesh24
+
 
 app.config['MYSQL_DB'] = 'fib'#database name
 
@@ -234,6 +236,10 @@ def add_receiver():
         mysql.connection.commit()
         #flash = 'Receiver Successfully Added !'
         return redirect(url_for("admindashboard"))
+
+@app.route("/update_receivers", methods=["POST"])
+def updatereceivers():
+    
 
 @app.route("/view_receivers", methods=['GET'])
 def viewreceivers():
