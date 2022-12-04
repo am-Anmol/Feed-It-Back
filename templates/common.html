@@ -32,13 +32,13 @@ footer {
       <a class="navbar-brand" href="/">Feed It Back</a>
       {% endif %}
       {% if session['type'] == 'donor':  %}
-      <a class="navbar-brand" href="/donorhome">Feed It Back</a>
+      <a class="navbar-brand" href="/homedo">Feed It Back</a>
       {% endif %}
       {% if session['type'] == 'volunteer':  %}
-      <a class="navbar-brand" href="/volunteerhome">Feed It Back</a>
+      <a class="navbar-brand" href="/homevo">Feed It Back</a>
       {% endif %}
       {% if session['type'] == 'admin':  %}
-      <a class="navbar-brand" href="/adminhome">Feed It Back</a>
+      <a class="navbar-brand" href="/homeadmin">Feed It Back</a>
       {% endif %}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -65,17 +65,17 @@ footer {
             {% endif %}
             {% if session['type'] == 'donor': %}
             <li class="nav-item">
-              <a  class="nav-link" href="/donordashboard">Dashboard</a>
+              <a  class="nav-link" href="/dashdo">Donor Dashboard</a>
             </li>
             {% endif %}
             {% if session['type'] == 'volunteer': %}
             <li class="nav-item">
-              <a  class="nav-link" href="/volunteerdashboard">Dashboard</a>
+              <a  class="nav-link" href="/dashvo">Volunteer Dashboard</a>
             </li>
             {% endif %}
             {% if session['type'] == 'admin': %}
             <li class="nav-item">
-              <a  class="nav-link" href="/dashadmin">Dashboard</a>
+              <a  class="nav-link" href="/dashadmin">Admin Dashboard</a>
             </li>
             {% endif %}
             {% if session['email']: %}
