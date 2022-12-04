@@ -79,50 +79,37 @@
     <div class="home-content">
       <h1 style="text-align: center;">LIST YOUR FOOD DETAILS</h1><br><br>
       <div class="form">
-          <form action="">
-            <label for="food">Food Items</label>
-            <input type="text" id="food" name="food"><br>
-    
-            <label for="foodq">Food Quantity</label>
-            <input type="text" id="foodq" name="foodq"><br>
-    
-            <label for="foodc">Category</label>
-            <input type="text" id="foodc" name="foodc"><br>
-    
-            <label for="desp">Description</label>
-            <textarea rows="2" cols="30"></textarea><br>
-    
-            <label for="date">Pickup Date</label>
-            <input type="date" id="date" name="date"><br>
-    
-            <label for="appt">Pickup Time</label>
-            <input type="time" id="appt" name="appt"><br>
-    
-            <label for="pickup">Pickup Address</label>
-            <textarea rows="2" cols="30"></textarea><br>
+        <div class="form-style-2">
+          <form action="" method="post">
+          <label for="foodqty"><span>Quantity <span class="required">*</span></span>
+            <input type="text" class="input-field" name="foodqty">
+          </label>
+          <label for="category"><span>Category <span class="required">*</span></span>
+            <select name="category" class="select-field">
+              <option value="veg">Vegetarian</option>
+              <option value="non-veg">Non Vegetarian</option>
+              <option value="egg">Contain Eggs</option>
+              </select>
+          </label>
+          <label for="pickuploc"><span>Pickup Location <span class="required">*</span></span>
+            <input type="text" class="input-field" name="pickuploc">
+          </label>
+          <label for="duration"><span>Duration Time <span class="required">*</span></span>
+            <input type="datetime-local" class="input-field" name="duration">
+          </label>
+          <label for="status"><span>Status</span>
+            <select name="status" class="select-field">
+              <option value="open">Open for pickup</option>
+              <option value="close">Closed for pickup</option>
+            </select>
+          </label>
           
-            <label for="state">State</label>
-            <input type="text" id="state" name="state"><br>
-    
-            <label for="city">City</label>
-            <input type="text" id="city" name="city"><br>
-    
-            <label for="person">Contact Person</label>
-            <input type="text" id="person" name="person"><br >
-    
-            <label for="mobile">Mobile Number</label>
-            <input type="number" id="mobile" name="mobile"><br />
-    
-            <div class="text-center">
-              <button type="button" class="btn btn-success" style="margin-top: 20px;width: 20%;">Donate!!!</button>
-            </div>
+          <label><span> </span><input type="submit" value="Submit" /></label>
           </form>
-      </div>
-        
-      </div>       
+        </div> 
+      </div>      
     </div>
-        
-       
+
   </section>
 
 
