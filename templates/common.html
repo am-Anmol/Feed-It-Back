@@ -14,6 +14,11 @@
     flex-direction: column;
     background-color:aliceblue;
 }
+  nav{
+    background-color: rgb(10, 37, 88);
+    font-family: 'Open Sans', sans-serif;
+    font-size: medium;
+  }
 footer {
     position: fixed;
     padding: 10px 10px 0px 10px;
@@ -21,12 +26,12 @@ footer {
     width: 100%;
     /* Height of the footer*/
     height: 40px;
-    background: black;
+    background:  rgb(10, 37, 88);
     color: aliceblue;
   }
 </style>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
       {% if not session['type']: %}
       <a class="navbar-brand" href="/">Feed It Back</a>
