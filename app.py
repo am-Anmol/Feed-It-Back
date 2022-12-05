@@ -188,9 +188,12 @@ def vhome():
 def volunteerdashboard():
     return render_template('dashvo.html')
 
-@app.route("/requestfood")
+@app.route("/requestfood", methods=['GET', 'POST'])
 def requestfood():
-    return render_template('RequestFood.html')
+    cur=mysql.connection.cursor()
+    cur.execute('select * from food_added')
+    food=cur.fetchall()
+    return render_template('RequestFood.html',food=food)
 
 @app.route("/adminhome")
 def ahome():
