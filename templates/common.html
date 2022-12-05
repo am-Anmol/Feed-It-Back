@@ -14,6 +14,16 @@
     flex-direction: column;
     background-color:aliceblue;
 }
+footer {
+    position: fixed;
+    padding: 10px 10px 0px 10px;
+    bottom: 0;
+    width: 100%;
+    /* Height of the footer*/
+    height: 40px;
+    background: black;
+    color: aliceblue;
+  }
 </style>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -55,17 +65,17 @@
             {% endif %}
             {% if session['type'] == 'donor': %}
             <li class="nav-item">
-              <a  class="nav-link" href="/donordashboard">Dashboard</a>
+              <a  class="nav-link" href="/donordashboard">Donor Dashboard</a>
             </li>
             {% endif %}
             {% if session['type'] == 'volunteer': %}
             <li class="nav-item">
-              <a  class="nav-link" href="/volunteerdashboard">Dashboard</a>
+              <a  class="nav-link" href="/volunteerdashboard">Volunteer Dashboard</a>
             </li>
             {% endif %}
             {% if session['type'] == 'admin': %}
             <li class="nav-item">
-              <a  class="nav-link" href="/dashadmin">Dashboard</a>
+              <a  class="nav-link" href="/dashadmin">Admin Dashboard</a>
             </li>
             {% endif %}
             {% if session['email']: %}
@@ -81,7 +91,7 @@
         
   {% endblock %}
     <br>
-    <footer class="container-fluid text-center" style="background-color: black; color: white;">
+    <footer class="container-fluid text-center">
       <p>Thank you for choosing us</p>
     </footer>
 

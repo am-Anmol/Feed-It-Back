@@ -22,12 +22,12 @@
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bxs-donate-heart'></i>
-      <a href="homeadmin.html"><span class="logo_name">Feed-It-Back</span></a>
+      <a href="/adminhome"><span class="logo_name">Feed-It-Back</span></a>
     </div>
       <ul class="nav-links">
 
         <li>
-          <a href="./css/dashboard.css" class="active">
+          <a href="/dashadmin" class="active">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Dashboard</span>
           </a>
@@ -109,7 +109,7 @@
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Dashboard</span>
+        <span class="dashboard">Admin Dashboard</span>
       </div>
     
     </nav>
@@ -119,7 +119,7 @@
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Donors</div>
-            <div class="number">{{no_donors}}</div>
+            <div class="number">{{no_donors[0].0}}</div>
             
           </div>
           <i class='bx bx-cart-alt cart'></i>
@@ -129,7 +129,7 @@
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Volunteers</div>
-            <div class="number">{{no_volunteers}}</div>
+            <div class="number">{{no_volunteers[0].0}}</div>
           </div>
           <i class='bx bx-cart-alt cart'></i>
           
