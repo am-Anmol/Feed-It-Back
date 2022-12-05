@@ -237,9 +237,31 @@ def add_receiver():
         #flash = 'Receiver Successfully Added !'
         return redirect(url_for("admindashboard"))
 
-@app.route("/update_receivers", methods=["POST"])
-def updatereceivers():
+@app.route("/edit_receiver/<int:id>", methods=["POST", "GET"])
+def updatereceivers(id):
+    r_id = id
+    cur = mysql.connection.cursor()
+    cur.execute("Select r_address, r_contact_number from reciever where reciever_id = %s", (id,))
+    data = cur.fetchone()
+
+
+    if request.method == "POST":
+        receiver_addr = request.form['addr']
+        receiver_num = request.form['phoneno']
+        cur.execute("Update reciever set r_address = %s, r_contact_number = %s where reciever_id = %s", (receiver_addr, receiver_num, id))
+        mysql.connection.commit()
+        return redirect(url_for("viewreceivers"))
+    return render_template("edit_receiver.html", **locals())
+
+@app.route("/delete_receiver/<int:id>", methods=["POST", "GET"])
+def deletereceivers(id):
+    r_id = id
+    cur = mysql.connection.cursor()
+    cur.execute("Delete from reciever where reciever_id = %s", (id,))
+    mysql.connection.commit()
+    return redirect(url_for("viewreceivers"))
     
+
 
 @app.route("/view_receivers", methods=['GET'])
 def viewreceivers():
