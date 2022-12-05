@@ -2,6 +2,7 @@ from flask import *
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
+from datetime import *
 
 app=Flask(__name__,static_url_path='/static')
 app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"  
@@ -109,6 +110,7 @@ def login():
         password = request.form['password']
         print(email, password)
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        data = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM users WHERE email = % s AND passwd = % s', (email, password))
         account = cursor.fetchone()
         if account:
@@ -116,10 +118,19 @@ def login():
             session['type']=account ['userType']
             msg = 'Logged in successfully !'
             if session['type'] == 'donor':
+                data.execute('select * from donor where email=%s',(email,))
+                details = data.fetchone()
+                session['id']=details['donor_id']
                 return redirect('/donorhome')
             elif session['type'] == 'volunteer':
+                data.execute('select * from volunteer where email=%s',(email,))
+                details = data.fetchone()
+                session['id']=details['volunteer_id']
                 return redirect('/volunteerhome')
             elif session['type'] == 'admin':
+                data.execute('select * from admins where email=%s',(email,))
+                details = data.fetchone()
+                session['id']=details['admin_id']
                 return redirect('/adminhome')
             else:
                 return 'You do not belong to our page'
@@ -159,11 +170,14 @@ def donormanage():
 def addfood():
     if request.method == 'POST':
         f_qty = request.form['foodqty']
-        category = request.form['categroy']  
-        address = request.form['pickuploc']
-        date = request.form['duration']
+        category = request.form['category']  
+        location = request.form['pickuploc']
+        duration = request.form['duration']
         status = request.form['status']
         cursor = mysql.connection.cursor()
+        cursor.execute('INSERT INTO food_added(food_qty, food_cat, f_status, pickup_location, created_time, duration_time,d_id) VALUES (%s, %s, %s, %s, %s,%s, %s)',(f_qty,category,status,location,datetime.now(),duration,session['id']));
+        mysql.connection.commit()
+        return redirect('/managefooddonor')
     return render_template('addfooddo.html')
 
 @app.route("/volunteerhome")
