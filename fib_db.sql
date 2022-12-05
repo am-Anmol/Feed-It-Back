@@ -110,3 +110,5 @@ for each row
 delimiter ;
 
 insert into admins values (1,'admin 1','admin@test.com','admin@1234');
+show tables;
+desc reciever;

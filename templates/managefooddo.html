@@ -162,30 +162,30 @@ table.table td .add {
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>S.No.</th>
-                        <th>Food Quantity</th>
-                        <th>Category</th>
-                        <th>Address</th>
-                        <th>Contact Person</th>
-                        <th>Listing Date</th>
-                        <th>Actions</th>
+                        <th scope="col">S.No.</th>
+                        <th scope="col">Donor Name</th>
+                        <th scope="col">Food Quantity</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Listing Date</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>3</td>
-                        <td>Vegetarain</td>
-                        <td>agra</td>
-                        <td>saumya</td>
-                        <td>11-11-22 11:00</td>
-
-                        <td>
-                           
-                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
+                  {% for row in fd %}
+                  <tr>
+                      <td scope="row">{{row.0}}</td>
+                      <td scope="row">{{dname[0].0}}</td>
+                      <td scope="row">{{row.1}}</td>
+                      <td scope="row">{{row.2}}</td>
+                      <td scope="row">{{row.4}}</td>
+                      <td scope="row">{{row.5}}</td>
+                      <td scope="row">
+                          <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                          <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                      </td>
                     </tr>
+                    {%endfor%}
                   
                 </tbody>
             </table>

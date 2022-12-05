@@ -10,7 +10,7 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
 
-app.config['MYSQL_PASSWORD'] = '1234'#password G@nesh24
+app.config['MYSQL_PASSWORD'] = 'Raghu@2000'#password G@nesh24
 
 
 app.config['MYSQL_DB'] = 'fib'#database name
@@ -158,13 +158,23 @@ def fhistory():
 def dhome():
     return render_template('homedo.html')
 
-@app.route("/donordashboard")
+@app.route("/donordashboard", methods=['GET','POST'])
 def donordashboard():
-    return render_template('dashdo.html')
+    cur=mysql.connection.cursor()
+    cur.execute('select count(*) from volunteer')
+    no_volunteers=cur.fetchall()
+    cur.close()
+    return render_template('dashdo.html',no_volunteers=no_volunteers)
 
-@app.route("/managefooddonor")
+@app.route("/managefooddonor", methods=['GET','POST'])
 def donormanage():
-    return render_template('managefooddo.html')
+    cursor=mysql.connection.cursor()
+    cursor.execute('SELECT * FROM food_added')
+    fd=cursor.fetchall()
+    cursor.execute('SELECT name FROM donor')
+    dname=cursor.fetchall()
+    cursor.close()
+    return render_template('managefooddo.html', fd=fd,dname=dname)
 
 @app.route("/addfood", methods=['GET', 'POST'])
 def addfood():
