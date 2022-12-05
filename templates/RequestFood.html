@@ -24,9 +24,6 @@ body {
 .table-wrapper {
     width: 100%;
     margin: 80px auto;
-    background-image: url(https://media.istockphoto.com/id/1401815228/photo/charity-donation-money-jar-with-blue-background-and-space-for-text.jpg?b=1&s=170667a&w=0&k=20&c=bkFicfGP76GR2JgnSFdqCzWDyULioHU_execjVBMrhQ=);
-    background-repeat: no-repeat;
-    background-size: cover;
     padding: 20px;	
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
@@ -156,39 +153,28 @@ table.table td .add {
                 </div>
                 <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th>S.No.</th>
-                            <th>Food Items</th>
-                            <th>Food Quantity</th>
-                            <th>Category</th>
-                            <th>Descp</th>
-                            <th>Address</th>
-                            <th>Contact Person</th>
-                            <th>Mobile Number</th>
-                            <th>Listing Date</th>
-                            <th>Listing Time</th>
-                            <th>Make Request</th>
-                        </tr>
+                      <tr>
+                          <th scope="col">Category</th>
+                          <th scope="col">Food Quantity</th>
+                          <th scope="col">Pickup Location</th>
+                          <th scope="col">Listing Time</th>
+                          <th scope="col">Duration Period</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Make Request</th>
+                      </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>rice</td>
-                            <td>3</td>
-                            <td>mess</td>
-                            <td>extra food</td>
-                            <td>agra</td>
-                            <td>saumya</td>
-                            <td>4353454354</td>
-                            <td>11-11-22 </td>
-                            <td>11:00</td>
-
-                            <td>
-                                <a href="#" style="color: red;font-weight:bold">REQUEST</a>
-                                
-                            </td>
-                        </tr>
-                      
+                      {% for row in food %}
+                      <tr>
+                        <td scope="row">{{row.2}}</td>
+                        <td scope="row">{{row.1}}</td>
+                        <td scope="row">{{row.4}}</td>
+                        <td scope="row">{{row.5}}</td>
+                        <td scope="row">{{row.6}}</td>
+                        <td scope="row">{{row.3}}</td>
+                        <td scope="row">Request</td>                          
+                      </tr>
+                      {%endfor%}
                     </tbody>
                 </table>
             </div>
