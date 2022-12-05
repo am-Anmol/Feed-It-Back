@@ -153,8 +153,15 @@ def donordashboard():
 def donormanage():
     return render_template('managefooddo.html')
 
-@app.route("/addfood")
+@app.route("/addfood", methods=['GET', 'POST'])
 def addfood():
+    if request.method == 'POST':
+        f_qty = request.form['foodqty']
+        category = request.form['categroy']  
+        address = request.form['pickuploc']
+        date = request.form['duration']
+        status = request.form['status']
+        cursor = mysql.connection.cursor()
     return render_template('addfooddo.html')
 
 @app.route("/volunteerhome")
