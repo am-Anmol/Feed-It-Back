@@ -118,7 +118,6 @@
                 <th scope="col">Address</th>
                 <th scope="col">Phone_Number</th>
                 <th scope="col">Email</th>
-                <th scope="col">Password</th>
             </tr>
         </thead>
         <tbody>
@@ -129,7 +128,10 @@
                 <td scope="row">{{row.2}}</td>
                 <td scope="row">{{row.3}}</td>
                 <td scope="row">{{row.4}}</td>
-                <td scope="row">{{row.5}}</td>
+                <td>
+                  <a class="edit" title="Edit" data-toggle="tooltip" href="/edit_receiver/{{row[0]}}"><i class="material-icons">&#xE254;</i></a>
+                  <a class="delete" title="Delete" data-toggle="tooltip" href="/delete_receiver/{{row[0]}}"><i class="material-icons">&#xE872;</i></a>
+              </td>
             </tr>
             {%endfor%}
         </tbody>
