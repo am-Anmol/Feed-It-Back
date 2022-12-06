@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Bootstrap Table with Add and Delete Row Feature</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/dashboard.css') }}">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+    .form {
+    display: flex;
+    justify-content: center;
+    }
+   </style>
+</head>
+<body>
+
+    <!-- side-navbar -->
+
+    <div class="sidebar">
+        <div class="logo-details">
+          <i class='bx bxs-donate-heart'></i>
+          <a href="/volunteerhome"><span class="logo_name">Feed-It-Back</span></a>
+        </div>
+          <ul class="nav-links">
+            <li>
+              <a href="/volunteerdashboard">
+                <i class='bx bx-grid-alt' ></i>
+                <span class="links_name">Volunteer Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/requestfood" class="active">
+                <i class='bx bx-box' ></i>
+                <span class="links_name">Request Food</span>
+              </a>
+            </li>
+            <li>
+              <a href="/volunteerhome">
+                <i class='bx bx-arrow-back'></i>
+                <span class="links_name">Back</span>
+              </a>
+            </li>
+            <li>
+              <a href="/logout">
+                <i class='bx bx-pie-chart-alt-2' ></i>
+                <span class="links_name">Log out</span>
+              </a>
+            </li>
+           
+          </ul>
+    </div>
+    
+    <section class="home-section">
+        
+        <nav>
+          <div class="sidebar-button">
+            <i class='bx bx-menu sidebarBtn'></i>
+            <span class="dashboard">Dashboard</span>
+          </div>
+        
+        </nav>
+
+        <div class="home-content">
+            <h1 style="text-align: center;">Add Request For Pickup</h1><br><br>
+            <div class="form">
+              <div class="form-style-2">
+                <form action="" method="post">
+                <label for="receiver"><span>Receiver <span class="required">*</span></span>
+                  <select name="receiver" class="select-field" required>
+                    {% for row in receiver %}
+                    <option value={{row.0}}>{{row.1}}</option>
+                    {%endfor%}
+                    </select>
+                </label>
+                <label for="status"><span>Status</span>
+                  <select name="status" class="select-field" required>
+                    <option value="open">Open for pickup</option>
+                    <option value="close">Closed for pickup</option>
+                  </select>
+                </label>
+                
+                <label><span> </span><input type="submit" value="Submit" /></label>
+                </form>
+              </div> 
+            </div>      
+          </div>
+    </section>
+
+<script>
+    let sidebar = document.querySelector(".sidebar");
+ let sidebarBtn = document.querySelector(".sidebarBtn");
+ sidebarBtn.onclick = function() {
+   sidebar.classList.toggle("active");
+   if(sidebar.classList.contains("active")){
+   sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+ }else
+   sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+ }
+  </script>
+</body>
+</html>

@@ -10,7 +10,7 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
 
-app.config['MYSQL_PASSWORD'] = 'Raghu@2000'#password G@nesh24
+app.config['MYSQL_PASSWORD'] = '1234'#password G@nesh24
 
 
 app.config['MYSQL_DB'] = 'fib'#database name
@@ -304,5 +304,14 @@ def viewreceivers():
     receiver=cur.fetchall()
     cur.close()
     return render_template('view_receivers.html',receiver=receiver)
+
+@app.route("/addrequest", methods=["POST", "GET"])
+def addrequest():
+    cur=mysql.connection.cursor()
+    cur.execute('select * from reciever')
+    receiver=cur.fetchall()
+    cur.close()
+    return render_template("add_request.html",receiver=receiver)
+
 
 app.run(debug=True)
