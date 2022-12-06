@@ -64,7 +64,7 @@ d_id int
 
 
 
-CREATE TABLE Volunteer_Request
+CREATE TABLE volunteer_request
 (
 requestId int PRIMARY KEY auto_increment,
 status varchar(255),
