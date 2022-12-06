@@ -168,7 +168,7 @@ table.table td .add {
                         <th scope="col">Category</th>
                         <th scope="col">Address</th>
                         <th scope="col">Listing Date</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -180,10 +180,7 @@ table.table td .add {
                       <td scope="row">{{row.2}}</td>
                       <td scope="row">{{row.4}}</td>
                       <td scope="row">{{row.5}}</td>
-                      <td scope="row">
-                          <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                          <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                      </td>
+                      <td scope="row">{{row.3}}</td>
                     </tr>
                     {%endfor%}
                   

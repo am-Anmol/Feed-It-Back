@@ -110,7 +110,7 @@ for each row
 delimiter ;
 
 delimiter //
-create trigger updatestatus after update on Volunteer_Request
+create trigger updatestatus after update on volunteer_request
 for each row 
  update food_added set f_status=new.status where foodid=old.foodId;//
 delimiter ;
