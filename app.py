@@ -23,9 +23,9 @@ mysql = MySQL(app)
 def Index():
     return render_template('index.html')
 
-@app.route("/aboutus")
+@app.route("/aboutus1")
 def about():
-    return render_template('aboutus.html')
+    return render_template('aboutus1.html')
 
 @app.route("/donorRegister")
 def dregister():

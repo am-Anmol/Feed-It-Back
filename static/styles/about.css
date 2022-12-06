@@ -1,0 +1,267 @@
+
+
+.header-img{
+    background: url(https://images.unsplash.com/photo-1638526970908-b18e32b0bc42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fGRvbmF0aW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60);
+    height: 70vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    margin-top: 0%;
+}
+
+.header-txt{
+    position: absolute;
+    top: 18%;
+    left: 0%;
+    margin-top: 0px;
+    transform: translate(-0%, -0%);
+    padding: 20px;
+    background: rgb(136, 136, 138);
+    height: 66vh;
+    width: 100%;
+    opacity: 0.6;
+}
+
+.header-txt h1{
+    font-size: 60px;
+    letter-spacing: 2px;
+    margin: 30px 0px 0px 40px;
+    color: black;
+    opacity: 1;
+}
+
+.header-txt h3{
+    font-size: 29px;
+    word-spacing: 2px;
+    margin: 18px 0px 0px 40px;
+    color: black;
+    opacity: 10;
+}
+
+.header-txt p{
+    color: black;
+    opacity: 1;
+    font-size: 18px;
+    text-align: justify;
+    margin: 20px 420px 55px 40px;
+}
+
+.header-txt a:first-of-type{
+    margin: 35px 20px 25px 40px;
+}
+
+.header-txt a{
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    border: 3px solid rgb(81, 204, 252);
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 15px;
+}
+
+.header-txt a:hover{
+    background-color: rgb(81, 204, 252);
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.about-us{
+    margin: 40px 100px;
+    text-align: justify;
+    
+}
+
+.about-us h1{
+    text-align: center;
+    letter-spacing: 2px;
+    word-spacing: 3px;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.about-us p{
+    color: black;
+    font-size: 18px;
+}
+
+.about-us hr:first-of-type{
+    margin-left: 150px;
+    height: 2px;
+    background-color: #0A2558;
+    border: 1px solid black;
+}
+
+.about-us hr:last-of-type{
+    margin-right: 150px;
+    height: 2px;
+    background-color: #0A2558;
+    border: 1px solid black;
+}
+
+.service-img{
+    background: url('../Donation-Managment-system/assets/images/about-service.jpg');
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    opacity: 0.7;
+}
+
+.service-txt{
+    position: absolute;
+    top: 130%;
+    left: 0%;
+    transform: translate(-0%, -15%);
+    padding: 20px;
+    height: 54vh;
+    width: 100%;
+}
+
+.service-txt h1{
+    margin-left: 20px;
+    margin-right: 850px;
+    margin-bottom: 40px;
+    padding: 10px;
+    font-size: 35px; 
+    background-color: rgb(10, 37, 88);
+    opacity: 0.8;
+    color: white;
+}
+
+.service-txt .box{
+    float: left;
+    width: 45%;
+    margin-left: 30%;
+    margin-right: 20px;
+    background-color: white;
+    
+}
+
+.service-txt .box img{
+    height: 300px;
+    width: 100%;
+}
+
+.service-txt .box h2{
+    margin-left: 10px;
+    color: black;
+    font-size: 30px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.service-txt .box p{
+    margin: 10px;
+    text-align: justify;
+    color: black;
+    font-size: 18px;
+}
+
+
+
+
+
+/* Breakpoint for larger laptop screen */
+@media(min-width: 1440px){
+    .header-img{
+        width: 102%;
+    }
+    
+    .header-txt{
+        top: 19%;
+        width: 102%;
+    }
+
+    .service-img{
+        width: 102%;
+    }
+    
+    .service-txt{
+        top:145%;
+    }
+
+    .service-txt .box{
+        margin-left: 38px;
+        margin-right: 33px;
+    }
+
+  
+}
+
+/* Breakpoint for Tablet Screen */
+@media(max-width: 768px) {
+.header-img{
+    width: 122%;
+}
+
+.header-txt{
+    top: 21%;
+    height: 70vh;
+    width: 122%;
+}
+
+.header-txt h1{
+    font-size: 58px;
+    margin: 30px 0px 0px 20px;
+}
+
+.header-txt h3{
+    font-size: 27px;
+    margin: 0px 0px 0px 20px;
+}
+
+.header-txt p{
+    margin: 10px 350px 55px 20px;
+}
+
+.header-txt a:first-of-type{
+    margin: 35px 20px 25px 20px;
+}
+
+.header-txt a{
+    font-size: 17px;
+}
+
+.about-us{
+    width: 109%;
+    margin: 40px 50px;
+}
+
+.service-img{
+    height: 280vh;
+    width: 122%;
+}
+
+.service-txt{
+    top: 163%;
+    width: 70%;
+}
+
+.service-txt h1{
+    margin-right: 50px;
+}
+
+.service-txt .box{
+    width: 550px;
+    margin: 0px 180px 20px 180px;
+}
+
+.service-txt .box h2{
+    font-size: 30px;
+}
+
+.service-txt .box p{
+    font-size: 20px;
+}
+
+
+
+
+
+}
