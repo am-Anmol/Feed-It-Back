@@ -18,6 +18,7 @@ app.config['MYSQL_DB'] = 'fib'#database name
 mysql = MySQL(app)
 
 
+
 @app.route("/")
 def Index():
     return render_template('index.html')
@@ -42,7 +43,8 @@ def donor_reg():
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM donor WHERE email = % s', (email, ))
     account = cursor.fetchone()
-    
+    cursor.execute('SELECT * FROM volunteer WHERE email = % s', (email, ))
+    account = cursor.fetchone()
 
     if account:
         flash('Account exists')
@@ -81,7 +83,8 @@ def volunteer_reg():
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM volunteer WHERE email = % s', (email, ))
     account = cursor.fetchone()
-    
+    cursor.execute('SELECT * FROM donor WHERE email = % s', (email, ))
+    account = cursor.fetchone()
 
     if account:
         flash('Account Exists')
@@ -149,17 +152,31 @@ def logout():
 def lgn():
     return render_template('login.html')
 
+def check_type(type):
+    ck_type = session.get("type")
+    print(ck_type == type)
+    if ck_type != None and ck_type == type:
+        return True
+    else:
+        return False
+
 @app.route("/foodhistory")
 def fhistory():
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     return render_template('foodhistory.html')
 
 
 @app.route("/donorhome")
 def dhome():
+    if not check_type("donor"):
+        return redirect(url_for("login"))
     return render_template('homedo.html')
 
 @app.route("/donordashboard", methods=['GET','POST'])
 def donordashboard():
+    if not check_type("donor"):
+        return redirect(url_for("login"))
     cur=mysql.connection.cursor()
     cur.execute('select count(*) from volunteer')
     no_volunteers=cur.fetchall()
@@ -168,6 +185,8 @@ def donordashboard():
 
 @app.route("/managefooddonor", methods=['GET','POST'])
 def donormanage():
+    if not check_type("donor"):
+        return redirect(url_for("login"))
     cursor=mysql.connection.cursor()
     cursor.execute('SELECT * FROM food_added')
     fd=cursor.fetchall()
@@ -178,6 +197,8 @@ def donormanage():
 
 @app.route("/addfood", methods=['GET', 'POST'])
 def addfood():
+    if not check_type("donor"):
+        return redirect(url_for("login"))
     if request.method == 'POST':
         f_qty = request.form['foodqty']
         category = request.form['category']  
@@ -192,14 +213,20 @@ def addfood():
 
 @app.route("/volunteerhome")
 def vhome():
+    if not check_type("volunteer"):
+        return redirect(url_for("login"))
     return render_template('homevo.html')
 
 @app.route("/volunteerdashboard")
 def volunteerdashboard():
+    if not check_type("volunteer"):
+        return redirect(url_for("login"))
     return render_template('dashvo.html')
 
 @app.route("/requestfood", methods=['GET', 'POST'])
 def requestfood():
+    if not check_type("volunteer"):
+        return redirect(url_for("login"))
     cur=mysql.connection.cursor()
     cur.execute('select * from food_added')
     food=cur.fetchall()
@@ -207,10 +234,14 @@ def requestfood():
 
 @app.route("/adminhome")
 def ahome():
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     return render_template('homeadmin.html')
 
 @app.route("/dashadmin", methods=['GET', 'POST'])
 def admindashboard():
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     cur=mysql.connection.cursor()
     cur.execute('select count(*) from donor')
     no_donors=cur.fetchall()
@@ -221,22 +252,62 @@ def admindashboard():
 
 @app.route("/view_donors", methods=['GET', 'POST'])
 def viewdonors():
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     cur=mysql.connection.cursor()
     cur.execute('select * from donor')
     all_donors=cur.fetchall()
     cur.close()
     return render_template('view_donors.html',all_donors=all_donors)
 
+@app.route("/edit_donor/<int:id>", methods=["POST", "GET"])
+def updatedonor(id):
+    d_id = id
+    cur = mysql.connection.cursor()
+    cur.execute("Select d_location, d_contact_number, email from donor where donor_id = %s", (id,))
+    data = cur.fetchone()
+
+
+    if request.method == "POST":
+        donor_location = request.form['d_location']
+        donor_contact = request.form['d_contact_number']
+        donor_email = request.form['email']
+        cur.execute("Update donor set d_location = %s, d_contact_number = %s, email = %s where donor_id = %s", (donor_location,donor_contact, donor_email, id))
+        mysql.connection.commit()
+        return redirect(url_for("viewdonors"))
+    return render_template("edit_donor.html", **locals())
+
 @app.route("/view_volunteers", methods=['GET', 'POST'])
 def viewvols():
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     cur=mysql.connection.cursor()
     cur.execute('select * from volunteer')
     all_volunteers=cur.fetchall()
     cur.close()
     return render_template('view_volunteers.html',all_volunteers=all_volunteers)
 
+@app.route("/edit_volunteer/<int:id>", methods=["POST", "GET"])
+def updatevolunteer(id):
+    v_id = id
+    cur = mysql.connection.cursor()
+    cur.execute("Select v_location, v_contact_number, email from volunteer where volunteer_id = %s", (id,))
+    data = cur.fetchone()
+
+
+    if request.method == "POST":
+        volunteer_location = request.form['v_location']
+        volunteer_contact = request.form['v_contact_number']
+        volunteer_email = request.form['email']
+        cur.execute("Update volunteer set v_location = %s, v_contact_number = %s, email = %s where volunteer_id = %s", (volunteer_location,volunteer_contact, volunteer_email, id))
+        mysql.connection.commit()
+        return redirect(url_for("viewvols"))
+    return render_template("edit_volunteer.html", **locals())
+
 @app.route("/view_foodavailable", methods=['GET', 'POST'])
 def view_foodavailable():
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     cur=mysql.connection.cursor()
     cur.execute('select * from food_added')
     food_available=cur.fetchall()
@@ -245,6 +316,8 @@ def view_foodavailable():
 
 @app.route("/view_foodrequested", methods=['GET', 'POST'])
 def view_requests():
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     cur=mysql.connection.cursor()
     cur.execute('select * from volunteer_request')
     food_requests=cur.fetchall()
@@ -253,11 +326,15 @@ def view_requests():
 
 @app.route("/add_receiver")
 def add_rec():
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     return render_template('add_receiver.html')
+
 
 @app.route("/add_receiver", methods = ["POST"])
 def add_receiver():
-    
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     address = request.form['r_address']
     phoneno = request.form['r_contact_number']
     cursor=mysql.connection.cursor()
@@ -273,6 +350,8 @@ def add_receiver():
 
 @app.route("/edit_receiver/<int:id>", methods=["POST", "GET"])
 def updatereceivers(id):
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     r_id = id
     cur = mysql.connection.cursor()
     cur.execute("Select r_address, r_contact_number from reciever where reciever_id = %s", (id,))
@@ -289,6 +368,8 @@ def updatereceivers(id):
 
 @app.route("/delete_receiver/<int:id>", methods=["POST", "GET"])
 def deletereceivers(id):
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     r_id = id
     cur = mysql.connection.cursor()
     cur.execute("Delete from reciever where reciever_id = %s", (id,))
@@ -299,6 +380,8 @@ def deletereceivers(id):
 
 @app.route("/view_receivers", methods=['GET'])
 def viewreceivers():
+    if not check_type("admin"):
+        return redirect(url_for("login"))
     cur=mysql.connection.cursor()
     cur.execute('select * from reciever')
     receiver=cur.fetchall()

@@ -109,15 +109,6 @@
        
       </ul>
   </div>
-  <section class="home-section">
-        
-    <nav>
-      <div class="sidebar-button">
-        <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Dashboard</span>
-      </div>
-    
-    </nav>
 
     <table class="table">
         <thead class="thread-dark">
@@ -127,7 +118,6 @@
                 <th scope="col">Address</th>
                 <th scope="col">Phone_Number</th>
                 <th scope="col">Email</th>
-                <th scope="col">Password</th>
             </tr>
         </thead>
         <tbody>
@@ -138,11 +128,14 @@
                 <td scope="row">{{row.2}}</td>
                 <td scope="row">{{row.3}}</td>
                 <td scope="row">{{row.4}}</td>
-                <td scope="row">{{row.5}}</td>
-                
+                <td>  
+                  <a class="edit" title="Edit" data-toggle="tooltip" href="/edit_donor/{{row[0]}}"><i class="material-icons">&#xE254;</i></a>
+                  <a class="delete" title="Delete" data-toggle="tooltip" href="/delete_donor/{{row[0]}}"><i class="material-icons">&#xE872;</i></a>
+              </td>
             </tr>
             {%endfor%}
         </tbody>
     </table>
+  </div>
 </body>
 </html>
