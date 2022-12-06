@@ -9,8 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-
- <link rel="stylesheet" href="../static/styles/dashboard.css">
+<link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/dashboard.css') }}">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -90,8 +89,6 @@ table.table td .add {
     display: none;
 }
 </style>
-
-</head>
 <body>
 
     <!-- side-navbar -->
@@ -112,12 +109,6 @@ table.table td .add {
               <a href="/requestfood" class="active">
                 <i class='bx bx-box' ></i>
                 <span class="links_name">Request Food</span>
-              </a>
-            </li>
-            <li>
-              <a href="/myrequest">
-                <i class='bx bx-book-content' ></i>
-                <span class="links_name">My Requests</span>
               </a>
             </li>
             <li>
@@ -146,9 +137,6 @@ table.table td .add {
         
         </nav>
 
-        <!-- table starts -->
-
-
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
@@ -160,44 +148,33 @@ table.table td .add {
                 <table class="table table-bordered">
                     <thead>
                       <tr>
-                          <th scope="col">Category</th>
-                          <th scope="col">Food Quantity</th>
+                          <th scope="col">Donor Name</th>
                           <th scope="col">Pickup Location</th>
-                          <th scope="col">Listing Time</th>
-                          <th scope="col">Duration Period</th>
-                          <th scope="col">Status By Donor</th>
-                          <th scope="col">Picked By volunteer</th>
-                          <th scope="col">Make Request</th>
+                          <th scope="col">Donor Contact</th>
+                          <th scope="col">Drop Location</th>
+                          <th scope="col">Receiver Contact</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Update Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {% for row in food %}
-                      {% for req in requests %}
+                      {% for row in req %}
                       <tr>
-                        <td scope="row">{{row.2}}</td>
+                        <td scope="row">{{row.10}}</td>
+                        <td scope="row">{{row.11}}</td>
+                        <td scope="row">{{row.12}}</td>
+                        <td scope="row">{{row.7}}</td>
+                        <td scope="row">{{row.8}}</td>
                         <td scope="row">{{row.1}}</td>
-                        <td scope="row">{{row.4}}</td>
-                        <td scope="row">{{row.5}}</td>
-                        <td scope="row">{{row.6}}</td>
-                        <td scope="row">{{row.3}}</td>
-                        <td scope="row">
-                          {% if req.2==row.0 %}
-                          Picked
-                          {% else %}
-                          Not Picked Up
-                          {% endif %}
-                        </td>
-                        <td scope="row">
-                          <a class="request" title="request" data-toggle="tooltip" href="/addrequest/{{row[0]}}/{{row[7]}}">Request</a>
-                        </td>                          
+                        <td scope="row">                        
+                            <a class="request" title="request" data-toggle="tooltip" href="/statusrequest/{{row[0]}}">Update</a>
+                        </td>                        
                       </tr>
-                      {%endfor%}
                       {%endfor%}
                     </tbody>
                 </table>
             </div>
-        </div>
-
+        </div>    
     </section>
 
 <script>

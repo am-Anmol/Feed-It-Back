@@ -230,7 +230,11 @@ def requestfood():
     cur=mysql.connection.cursor()
     cur.execute('select * from food_added')
     food=cur.fetchall()
-    return render_template('RequestFood.html',food=food)
+    cur.execute('select * from volunteer_request')
+    requests=cur.fetchall()
+    cur.execute('select * from volunteer_request')
+    volunteer=cur.fetchall()
+    return render_template('RequestFood.html',food=food,requests=requests,volunteer=volunteer)
 
 @app.route("/adminhome")
 def ahome():
@@ -354,13 +358,42 @@ def viewreceivers():
     cur.close()
     return render_template('view_receivers.html',receiver=receiver)
 
-@app.route("/addrequest", methods=["POST", "GET"])
-def addrequest():
+@app.route("/addrequest/<int:fid>/<int:did>", methods=["POST", "GET"])
+def addrequest(fid,did):
     cur=mysql.connection.cursor()
     cur.execute('select * from reciever')
     receiver=cur.fetchall()
-    cur.close()
-    return render_template("add_request.html",receiver=receiver)
+    return render_template("add_request.html",receiver=receiver,fid=fid,did=did)
+
+@app.route("/add_request/<int:fid>/<int:did>", methods=["POST", "GET"])
+def add_request(fid,did):
+    cur=mysql.connection.cursor()
+    if request.method == 'POST':
+        recev = request.form['receiver']
+        status = request.form['status']
+        cur.execute('Insert into volunteer_request(status, foodId, donorId, recieverId, volunteerId) values(%s,%s,%s,%s,%s)',(status,fid,did,recev,session['id']))
+        mysql.connection.commit()
+        cur.close()
+        return redirect('/requestfood')
+    
+
+@app.route("/myrequest", methods=["POST", "GET"])
+def myrequest():
+    cur=mysql.connection.cursor()
+    cur.execute('select * from volunteer_request join reciever on recieverId=reciever_id join donor on donorId=donor_id where volunteerId=%s',(session['id'],))
+    req=cur.fetchall()        
+    return render_template("myrequest.html",req=req)
+
+@app.route("/statusrequest/<int:id>", methods=["POST", "GET"])
+def statusrequest(id):
+    if request.method == 'POST':
+        cur=mysql.connection.cursor()
+        status = request.form['status']
+        cur.execute("Update volunteer_request set volunteer_request = %s where requestId = %s", (status, id))
+        mysql.connection.commit()
+        cur.close()
+        return redirect('/myrequest')
+    return render_template("updateRequestStatus.html")
 
 
 app.run(debug=True)
