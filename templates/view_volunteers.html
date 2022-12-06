@@ -91,7 +91,19 @@ table.table .form-control.error {
 table.table td .add {
     display: none;
 }
-
+.topnav .search-container {
+  float: right;
+}
+.topnav .search-container button {
+  float: right;
+  padding: 1px 8px;
+  margin-right: 16px;
+  margin-bottom: 1px;;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
    </style>
 <body>
     
@@ -186,7 +198,14 @@ table.table td .add {
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Dashboard</span>
       </div>
-    
+      <div class="topnav">
+        <div class="search-container">
+          <form action="/view_volunteers" method ="POST">
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </div>
     </nav>
  <div class="table-responsive">
     <div class="table-wrapper">
@@ -208,7 +227,7 @@ table.table td .add {
                 </tr>
             </thead>
             <tbody>
-                {% for row in receiver %}
+                {% for row in all_volunteers %}
             <tr>
               <td scope="row">{{row.0}}</td>
               <td scope="row">{{row.1}}</td>

@@ -10,7 +10,7 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
 
-app.config['MYSQL_PASSWORD'] = 'root'#password G@nesh24
+app.config['MYSQL_PASSWORD'] = 'Raghu@2000'#password G@nesh24
 
 
 app.config['MYSQL_DB'] = 'fib'#database name
@@ -260,9 +260,17 @@ def viewdonors():
         return redirect(url_for("login"))
     cur=mysql.connection.cursor()
     cur.execute('select * from donor')
+    search=None
+    if request.method == "POST":
+        search=request.form['search']
+        sq="%"+search+"%"
+        cur.execute('select * from donor WHERE name LIKE %s',(sq,))
     all_donors=cur.fetchall()
     cur.close()
     return render_template('view_donors.html',all_donors=all_donors)
+
+
+
 
 @app.route("/edit_donor/<int:id>", methods=["POST", "GET"])
 def updatedonor(id):
@@ -287,6 +295,11 @@ def viewvols():
         return redirect(url_for("login"))
     cur=mysql.connection.cursor()
     cur.execute('select * from volunteer')
+    search=None
+    if request.method == "POST":
+        search=request.form['search']
+        sq="%"+search+"%"
+        cur.execute('select * from volunteer WHERE v_name LIKE %s',(sq,))
     all_volunteers=cur.fetchall()
     cur.close()
     return render_template('view_volunteers.html',all_volunteers=all_volunteers)
