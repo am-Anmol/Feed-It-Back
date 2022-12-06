@@ -2,7 +2,7 @@ DROP SCHEMA IF EXISTS fib;
 create database fib;
 use fib;
 
-create table Admins (
+create table admins (
 admin_id int primary key auto_increment,
 admin_name varchar(255),
 email varchar(255),
