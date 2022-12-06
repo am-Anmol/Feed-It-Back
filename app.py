@@ -228,13 +228,9 @@ def requestfood():
     if not check_type("volunteer"):
         return redirect(url_for("login"))
     cur=mysql.connection.cursor()
-    cur.execute('select * from food_added')
+    cur.execute('select * from food_added f left join volunteer_request r on f.foodid=r.foodId order by f.created_time desc')
     food=cur.fetchall()
-    cur.execute('select * from volunteer_request')
-    requests=cur.fetchall()
-    cur.execute('select * from volunteer_request')
-    volunteer=cur.fetchall()
-    return render_template('RequestFood.html',food=food,requests=requests,volunteer=volunteer)
+    return render_template('RequestFood.html',food=food)
 
 @app.route("/adminhome")
 def ahome():
@@ -427,20 +423,22 @@ def add_request(fid,did):
 @app.route("/myrequest", methods=["POST", "GET"])
 def myrequest():
     cur=mysql.connection.cursor()
-    cur.execute('select * from volunteer_request join reciever on recieverId=reciever_id join donor on donorId=donor_id where volunteerId=%s',(session['id'],))
+    cur.execute('select * from volunteer_request join reciever on recieverId=reciever_id join donor on donorId=donor_id where volunteerId=%s order by requestId desc',(session['id'],))
     req=cur.fetchall()        
     return render_template("myrequest.html",req=req)
 
 @app.route("/statusrequest/<int:id>", methods=["POST", "GET"])
 def statusrequest(id):
+    return render_template("updateRequestStatus.html",id=id)
+
+@app.route("/updatestatusrequest/<int:id>", methods=["POST", "GET"])
+def updatestatusrequest(id):
     if request.method == 'POST':
         cur=mysql.connection.cursor()
         status = request.form['status']
-        cur.execute("Update volunteer_request set volunteer_request = %s where requestId = %s", (status, id))
+        cur.execute("Update volunteer_request set status = %s where requestId = %s", (status, id))
         mysql.connection.commit()
         cur.close()
         return redirect('/myrequest')
-    return render_template("updateRequestStatus.html")
-
 
 app.run(debug=True)

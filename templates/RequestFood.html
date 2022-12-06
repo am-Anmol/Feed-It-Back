@@ -172,7 +172,6 @@ table.table td .add {
                     </thead>
                     <tbody>
                       {% for row in food %}
-                      {% for req in requests %}
                       <tr>
                         <td scope="row">{{row.2}}</td>
                         <td scope="row">{{row.1}}</td>
@@ -181,17 +180,21 @@ table.table td .add {
                         <td scope="row">{{row.6}}</td>
                         <td scope="row">{{row.3}}</td>
                         <td scope="row">
-                          {% if req.2==row.0 %}
-                          Picked
+                          {% if row.8 %}
+                          Booked
                           {% else %}
-                          Not Picked Up
+                          Not booked
                           {% endif %}
                         </td>
                         <td scope="row">
+                          {% if row.8 %}
+                          <a class="request" title="request" data-toggle="tooltip" disabled>Request</a>
+                          {% else %}
                           <a class="request" title="request" data-toggle="tooltip" href="/addrequest/{{row[0]}}/{{row[7]}}">Request</a>
+                          {% endif %}
                         </td>                          
                       </tr>
-                      {%endfor%}
+                      
                       {%endfor%}
                     </tbody>
                 </table>
