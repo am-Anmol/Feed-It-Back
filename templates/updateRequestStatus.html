@@ -37,6 +37,12 @@
               </a>
             </li>
             <li>
+              <a href="/myrequest">
+                <i class='bx bx-book-content' ></i>
+                <span class="links_name">My Requests</span>
+              </a>
+            </li>
+            <li>
               <a href="/volunteerhome">
                 <i class='bx bx-arrow-back'></i>
                 <span class="links_name">Back</span>
@@ -66,17 +72,11 @@
             <h1 style="text-align: center;">Update Status</h1><br><br>
             <div class="form">
               <div class="form-style-2">
-                <form action="" method="post">
-                    <label for="receiver"><span>Drop Location <span class="required">*</span></span>
-                        <select name="receiver" class="select-field" required>
-                            {% for row in receiver %}
-                            <option value={{row.0}}>{{row.1}}</option>
-                            {%endfor%}
-                        </select>
-                    </label>
+                <form action="/updatestatusrequest/{{id}}" method="post">
                     <label for="status"><span>Status</span>
                         <select name="status" class="select-field" required>
-                            <option value="add">Request Added</option>
+                            <option value="picked">Picked</option>
+                            <option value="delivered">Delivered</option>
                         </select>
                     </label>
                     <label><span> </span><input type="submit" value="Submit" /></label>

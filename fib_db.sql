@@ -109,6 +109,10 @@ for each row
  insert food_del values(old.foodid,old.food_qty,old.food_cat,old.f_status,old.pickup_location,old.created_time,old.duration_time,old.d_id);//
 delimiter ;
 
+delimiter //
+create trigger updatestatus after update on Volunteer_Request
+for each row 
+ update food_added set f_status=new.status where foodid=old.foodId;//
+delimiter ;
+
 insert into admins values (1,'admin 1','admin@test.com','admin@1234');
-show tables;
-desc reciever;
