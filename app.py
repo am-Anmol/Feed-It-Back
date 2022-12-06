@@ -10,7 +10,7 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
 
-app.config['MYSQL_PASSWORD'] = '1234'#password G@nesh24
+app.config['MYSQL_PASSWORD'] = 'Raghu@2000'#password G@nesh24
 
 
 app.config['MYSQL_DB'] = 'fib'#database name
@@ -264,6 +264,23 @@ def viewdonors():
     cur.close()
     return render_template('view_donors.html',all_donors=all_donors)
 
+@app.route("/edit_donor/<int:id>", methods=["POST", "GET"])
+def updatedonor(id):
+    d_id = id
+    cur = mysql.connection.cursor()
+    cur.execute("Select d_location, d_contact_number, email from donor where donor_id = %s", (id,))
+    data = cur.fetchone()
+
+
+    if request.method == "POST":
+        donor_location = request.form['d_location']
+        donor_contact = request.form['d_contact_number']
+        donor_email = request.form['email']
+        cur.execute("Update donor set d_location = %s, d_contact_number = %s, email = %s where donor_id = %s", (donor_location,donor_contact, donor_email, id))
+        mysql.connection.commit()
+        return redirect(url_for("viewdonors"))
+    return render_template("edit_donor.html", **locals())
+
 @app.route("/view_volunteers", methods=['GET', 'POST'])
 def viewvols():
     if not check_type("admin"):
@@ -273,6 +290,23 @@ def viewvols():
     all_volunteers=cur.fetchall()
     cur.close()
     return render_template('view_volunteers.html',all_volunteers=all_volunteers)
+
+@app.route("/edit_volunteer/<int:id>", methods=["POST", "GET"])
+def updatevolunteer(id):
+    v_id = id
+    cur = mysql.connection.cursor()
+    cur.execute("Select v_location, v_contact_number, email from volunteer where volunteer_id = %s", (id,))
+    data = cur.fetchone()
+
+
+    if request.method == "POST":
+        volunteer_location = request.form['v_location']
+        volunteer_contact = request.form['v_contact_number']
+        volunteer_email = request.form['email']
+        cur.execute("Update volunteer set v_location = %s, v_contact_number = %s, email = %s where volunteer_id = %s", (volunteer_location,volunteer_contact, volunteer_email, id))
+        mysql.connection.commit()
+        return redirect(url_for("viewvols"))
+    return render_template("edit_volunteer.html", **locals())
 
 @app.route("/view_foodavailable", methods=['GET', 'POST'])
 def view_foodavailable():
