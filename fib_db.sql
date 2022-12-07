@@ -105,11 +105,11 @@ for each row
  insert users values(new.admin_name,new.email,new.ad_password,'admin');//
 delimiter ;
 
-delimiter //
-create trigger bckFoodDel before delete on food_added
-for each row 
- insert food_del values(old.foodid,old.food_qty,old.food_cat,old.f_status,old.pickup_location,old.created_time,old.duration_time,old.d_id);//
-delimiter ;
+-- delimiter //
+-- create trigger bckFoodDel before delete on food_added
+-- for each row 
+--  insert food_del values(old.foodid,old.food_qty,old.food_cat,old.f_status,old.pickup_location,old.created_time,old.duration_time,old.d_id);//
+-- delimiter ;
 
 insert into admins values (1,'admin 1','admin@test.com','admin@1234');
 

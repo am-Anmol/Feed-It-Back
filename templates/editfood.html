@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!-- CSS Link -->
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/dashboard.css') }}">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <style>
+    .form {
+    display: flex;
+    justify-content: center;
+    }
+   </style>
+<body>
+
+   <!-- side-navbar Starts -->
+
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxs-donate-heart'></i>
+      <a href="/donorhome"><span class="logo_name">Feed-It-Back</span></a>
+    </div>
+      <ul class="nav-links">
+
+        <li>
+          <a href="/donordashboard">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Donor Dashboard</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/addfood" >
+            <i class='bx bx-box' ></i>
+            <span class="links_name">Add Food Details</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/managefooddonor" class="active">
+            <i class='bx bx-list-ul' ></i>
+            <span class="links_name">Manage Food List</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/donorhome">
+            <i class='bx bx-arrow-back'></i>
+            <span class="links_name">Back</span>
+          </a>
+        </li>
+        <li>
+          <a href="/logout">
+            <i class='bx bx-pie-chart-alt-2' ></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+       
+      </ul>
+  </div>
+
+ <!-- nav ends -->
+
+
+  <!-- main section starts -->
+  <section class="home-section">
+
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+    
+    </nav>
+
+    <div class="home-content">
+      <h1 style="text-align: center;">EDIT YOUR FOOD DETAILS</h1>
+      <h5 style="text-align: center;">*Please select the dropdown options again</h5>
+      <br><br>
+       
+      <div class="form">
+        <div class="form-style-2">
+          <form action="/editfood/{{id}}" method="post">
+          <label for="foodqty"><span>Quantity <span class="required">*</span></span>
+            <input type="text" class="input-field"  value="{{fd[1]}}" name="foodqty" required>
+          </label>
+          <label for="category"><span>Category <span class="required">*</span></span>
+            <select name="category" class="select-field" value={{fd[2]}} required>
+              <option value="veg">Vegetarian</option>
+              <option value="non-veg">Non Vegetarian</option>
+              <option value="egg">Contain Eggs</option>
+              </select>
+          </label>
+          <label for="pickuploc"><span>Pickup Location <span class="required">*</span></span>
+            <input type="text" class="input-field" name="pickuploc" value={{fd[4]}} required>
+          </label>
+          <label for="duration"><span>Duration Time <span class="required">*</span></span>
+            <input type="datetime-local" class="input-field" name="duration" value={{fd[6]}} required>
+          </label>
+          <label for="status"><span>Status</span>
+            <select name="status" class="select-field" value = {{fd[2]}} required>
+              <option value="open">Open for pickup</option>
+              <option value="close">Closed for pickup</option>
+            </select>
+          </label>
+          
+          <label><span> </span><input type="submit" value="Submit" /></label>
+          </form>
+        </div> 
+      </div>      
+    </div>
+
+  </section>
+
+
+  <!-- Js part for side-navbar -->
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
+

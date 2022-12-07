@@ -12,10 +12,10 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
 
-app.config['MYSQL_PASSWORD'] = '1234'#password G@nesh24
+app.config['MYSQL_PASSWORD'] = 'G@nesh24'#password G@nesh24
 
 
-app.config['MYSQL_DB'] = 'fib'#database name
+app.config['MYSQL_DB'] = '1234'#database name
 
 mysql = MySQL(app)
 
@@ -200,6 +200,50 @@ def donormanage():
     dname=cursor.fetchall()
     cursor.close()
     return render_template('managefooddo.html', fd=fd,dname=dname)
+
+@app.route("/editfood/<int:id>", methods=["GET", "POST"])
+def editfood(id):
+    if not check_type("donor"):
+        return redirect(url_for("login"))
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM food_added where foodid = %s',(id,))
+    fd=cur.fetchone()
+    print(id)
+    if request.method == "POST":
+        f_qty = request.form['foodqty']
+        category = request.form['category']  
+        location = request.form['pickuploc']
+        duration = request.form['duration']
+        status = request.form['status']
+        cur.execute("Update food_added set food_qty = %s, food_cat= %s, f_status = %s, pickup_location = %s,duration_time = %s ",
+        (f_qty, category, status, location, duration))
+        mysql.connection.commit()
+        return redirect(url_for("donormanage"))
+    print("Fd:", fd)
+    return render_template("editfood.html", **locals())
+
+@app.route("/deletefood/<int:id>", methods=['GET','POST'])
+def deletefood(id):
+    if not check_type("donor"):
+        return redirect(url_for("login"))
+    cursor=mysql.connection.cursor()
+    cursor.execute("Select * From volunteer_request where foodId = %s", (id,))
+    item= cursor.fetchone()
+    if(item):
+        flash("Requested accepted by volunteer. Pls contact the volunteeer.")
+    else:
+        cursor.execute("Delete from food_added where foodid = %s and d_id = %s",(id, session.get("id"), ))
+        mysql.connection.commit()
+        redirect(url_for("donormanage"))
+    
+    cursor.execute('SELECT * FROM food_added where d_id = %s',(session.get("id"),))
+    fd=cursor.fetchall()
+    cursor.execute('SELECT name FROM donor where donor_id = %s',(session.get("id"),))
+    dname=cursor.fetchall()
+    cursor.close()
+    return render_template('managefooddo.html', **locals())
+
+
 
 @app.route("/addfood", methods=['GET', 'POST'])
 def addfood():
