@@ -72,10 +72,12 @@
             <h1 style="text-align: center;">Update Status</h1><br><br>
             <div class="form">
               <div class="form-style-2">
-                <form action="/updatestatusrequest/{{id}}" method="post">
-                    <label for="status"><span>Status</span>
+                <form action="/updatestatusrequest/{{id}}" method="post" enctype="multipart/form-data">
+                  <label for="file"><span>Food Images<span class="required">*</span></span>
+                    <input type="file" class="input-field" name="file" required>
+                  </label>
+                    <label for="status"><span>Status<span class="required">*</span></span>
                         <select name="status" class="select-field" required>
-                            <option value="picked">Picked</option>
                             <option value="delivered">Delivered</option>
                         </select>
                     </label>

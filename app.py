@@ -454,7 +454,12 @@ def updatestatusrequest(id):
     if request.method == 'POST':
         cur=mysql.connection.cursor()
         status = request.form['status']
-        cur.execute("Update volunteer_request set status = %s where requestId = %s", (status, id))
+        key=uuid.uuid1()
+        file = request.files['file']
+        file.save(f"static/volunteerimages/{file.filename}")
+        img_new_name = f"{key}{file.filename}"
+        os.rename(f"static/volunteerimages/{file.filename}",f"static/volunteerimages/{img_new_name}")
+        cur.execute("Update volunteer_request set status = %s , img = %s where requestId = %s", (status,img_new_name,id))
         mysql.connection.commit()
         cur.close()
         return redirect('/myrequest')
