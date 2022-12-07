@@ -140,6 +140,9 @@ h6{
     color: #333333;
     font-weight: 700;
 }
+h4{
+    font-weight: bold !important;
+}
 img{
     width: 100%;
     height: auto;
