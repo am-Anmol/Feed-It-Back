@@ -3,6 +3,8 @@ from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
 from datetime import *
+import uuid
+import os
 
 app=Flask(__name__,static_url_path='/static')
 app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"  
@@ -10,7 +12,7 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
 
-app.config['MYSQL_PASSWORD'] = 'Raghu@2000'#password G@nesh24
+app.config['MYSQL_PASSWORD'] = '1234'#password G@nesh24
 
 
 app.config['MYSQL_DB'] = 'fib'#database name
@@ -208,8 +210,13 @@ def addfood():
         location = request.form['pickuploc']
         duration = request.form['duration']
         status = request.form['status']
+        key=uuid.uuid1()
+        file = request.files['file']
+        file.save(f"static/donorimages/{file.filename}")
+        img_new_name = f"{key}{file.filename}"
+        os.rename(f"static/donorimages/{file.filename}",f"static/donorimages/{img_new_name}")
         cursor = mysql.connection.cursor()
-        cursor.execute('INSERT INTO food_added(food_qty, food_cat, f_status, pickup_location, created_time, duration_time,d_id) VALUES (%s, %s, %s, %s, %s,%s, %s)',(f_qty,category,status,location,datetime.now(),duration,session['id']));
+        cursor.execute('INSERT INTO food_added(food_qty, food_cat, f_status, pickup_location, created_time, duration_time,d_id,img) VALUES (%s, %s, %s, %s, %s,%s, %s,%s)',(f_qty,category,status,location,datetime.now(),duration,session['id'],img_new_name));
         mysql.connection.commit()
         return redirect('/managefooddonor')
     return render_template('addfooddo.html')

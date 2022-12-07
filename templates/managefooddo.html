@@ -169,6 +169,8 @@ table.table td .add {
                         <th scope="col">Address</th>
                         <th scope="col">Listing Date</th>
                         <th scope="col">Status</th>
+
+                        <th scope="col">Images</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -181,6 +183,10 @@ table.table td .add {
                       <td scope="row">{{row.4}}</td>
                       <td scope="row">{{row.5}}</td>
                       <td scope="row">{{row.3}}</td>
+
+                      <td scope="row">
+                      <img src="static/donorimages/{{row.8}}" alt="loading" width="80" height="90">  
+                      </td>
                     </tr>
                     {%endfor%}
                   

@@ -80,7 +80,7 @@
       <h1 style="text-align: center;">LIST YOUR FOOD DETAILS</h1><br><br>
       <div class="form">
         <div class="form-style-2">
-          <form action="" method="post">
+          <form action="/addfood" method="post" enctype="multipart/form-data">
           <label for="foodqty"><span>Quantity <span class="required">*</span></span>
             <input type="text" class="input-field" name="foodqty" required>
           </label>
@@ -103,7 +103,9 @@
               <option value="close">Closed for pickup</option>
             </select>
           </label>
-          
+          <label for="file"><span>Food Images<span class="required">*</span></span>
+            <input type="file" class="input-field" name="file" required>
+          </label>
           <label><span> </span><input type="submit" value="Submit" /></label>
           </form>
         </div> 
