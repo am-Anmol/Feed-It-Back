@@ -112,9 +112,6 @@ for each row
 delimiter ;
 
 insert into admins values (1,'admin 1','admin@test.com','admin@1234');
-show tables;
-select * from volunteer;
-desc food_del;
-select * from donor WHERE name LIKE "%rag%";
-delete from food_added where d_id = 1;
-select name from donor where donor_id =1;
+
+ALTER TABLE food_added ADD img varchar(255);
+ALTER TABLE volunteer_request ADD img varchar(255);
