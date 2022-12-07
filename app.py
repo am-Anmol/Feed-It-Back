@@ -188,9 +188,9 @@ def donormanage():
     if not check_type("donor"):
         return redirect(url_for("login"))
     cursor=mysql.connection.cursor()
-    cursor.execute('SELECT * FROM food_added')
+    cursor.execute('SELECT * FROM food_added where d_id = %s',(session.get("id"),))
     fd=cursor.fetchall()
-    cursor.execute('SELECT name FROM donor')
+    cursor.execute('SELECT name FROM donor where donor_id = %s',(session.get("id"),))
     dname=cursor.fetchall()
     cursor.close()
     return render_template('managefooddo.html', fd=fd,dname=dname)
