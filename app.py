@@ -10,7 +10,7 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
 
-app.config['MYSQL_PASSWORD'] = '1234'#password G@nesh24
+app.config['MYSQL_PASSWORD'] = 'Raghu@2000'#password G@nesh24
 
 
 app.config['MYSQL_DB'] = 'fib'#database name
@@ -124,17 +124,17 @@ def login():
                 data.execute('select * from donor where email=%s',(email,))
                 details = data.fetchone()
                 session['id']=details['donor_id']
-                return redirect('/donorhome')
+                return redirect('/donordashboard')
             elif session['type'] == 'volunteer':
                 data.execute('select * from volunteer where email=%s',(email,))
                 details = data.fetchone()
                 session['id']=details['volunteer_id']
-                return redirect('/volunteerhome')
+                return redirect('/volunteerdashboard')
             elif session['type'] == 'admin':
                 data.execute('select * from admins where email=%s',(email,))
                 details = data.fetchone()
                 session['id']=details['admin_id']
-                return redirect('/adminhome')
+                return redirect('/dashadmin')
             else:
                 return 'You do not belong to our page'
 
@@ -188,9 +188,9 @@ def donormanage():
     if not check_type("donor"):
         return redirect(url_for("login"))
     cursor=mysql.connection.cursor()
-    cursor.execute('SELECT * FROM food_added')
+    cursor.execute('SELECT * FROM food_added where d_id = %s',(session.get("id"),))
     fd=cursor.fetchall()
-    cursor.execute('SELECT name FROM donor')
+    cursor.execute('SELECT name FROM donor where donor_id = %s',(session.get("id"),))
     dname=cursor.fetchall()
     cursor.close()
     return render_template('managefooddo.html', fd=fd,dname=dname)
@@ -217,11 +217,14 @@ def vhome():
         return redirect(url_for("login"))
     return render_template('homevo.html')
 
-@app.route("/volunteerdashboard")
+@app.route("/volunteerdashboard", methods=['GET','POST'])
 def volunteerdashboard():
+    cursor=mysql.connection.cursor()
+    cursor.execute('SELECT count(*) FROM volunteer')
+    no_vol=cursor.fetchall()
     if not check_type("volunteer"):
         return redirect(url_for("login"))
-    return render_template('dashvo.html')
+    return render_template('dashvo.html', no_vol=no_vol)
 
 @app.route("/requestfood", methods=['GET', 'POST'])
 def requestfood():
