@@ -248,10 +248,14 @@ def admindashboard():
     cur=mysql.connection.cursor()
     cur.execute('select count(*) from donor')
     no_donors=cur.fetchall()
+    cur.execute('select count(*) from food_added')
+    no_food=cur.fetchall()
     cur.execute('select count(*) from volunteer')
     no_volunteers=cur.fetchall()
+    cur.execute('select count(*) from volunteer_request')
+    no_req=cur.fetchall()
     cur.close()
-    return render_template('dashadmin.html',no_donors=no_donors, no_volunteers=no_volunteers)
+    return render_template('dashadmin.html',no_donors=no_donors,no_food=no_food, no_volunteers=no_volunteers,no_req=no_req)
 
 @app.route("/view_donors", methods=['GET', 'POST'])
 def viewdonors():
