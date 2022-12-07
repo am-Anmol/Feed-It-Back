@@ -124,17 +124,17 @@ def login():
                 data.execute('select * from donor where email=%s',(email,))
                 details = data.fetchone()
                 session['id']=details['donor_id']
-                return redirect('/donorhome')
+                return redirect('/donordashboard')
             elif session['type'] == 'volunteer':
                 data.execute('select * from volunteer where email=%s',(email,))
                 details = data.fetchone()
                 session['id']=details['volunteer_id']
-                return redirect('/volunteerhome')
+                return redirect('/volunteerdashboard')
             elif session['type'] == 'admin':
                 data.execute('select * from admins where email=%s',(email,))
                 details = data.fetchone()
                 session['id']=details['admin_id']
-                return redirect('/adminhome')
+                return redirect('/dashadmin')
             else:
                 return 'You do not belong to our page'
 
