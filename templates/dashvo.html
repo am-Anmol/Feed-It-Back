@@ -77,7 +77,13 @@
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Volunteers Dashboard</span>
       </div>
-    
+      <a class="profile" style="display: flex ; flex-direction: row;">
+        <img src="../static/images/user.png" alt="User" width="50" height="50" style="margin-right: 4px;" title={{session['name']}}>
+        <div >
+          <h3 style="color: rgb(10, 37, 88) ;text-align: center;">Welcome {{session['name']}}</h3>
+          <p style="color: rgb(10, 37, 88) ;text-align: center;">{{session['email']}}</p>
+        </div>
+      </a>
     </nav>
 
     <div class="home-content">
