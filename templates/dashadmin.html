@@ -111,7 +111,13 @@
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Admin Dashboard</span>
       </div>
-    
+      <a class="profile" style="display: flex ; flex-direction: row;">
+        <img src="../static/images/user.png" alt="User" width="50" height="50" style="margin-right: 4px;" title={{session['name']}}>
+        <div >
+          <h3 style="color: rgb(10, 37, 88) ;text-align: center;">Welcome {{session['name']}}</h3>
+          <p style="color: rgb(10, 37, 88) ;text-align: center;">{{session['email']}}</p>
+        </div>
+      </a>
     </nav>
     {% block content %}
     <div class="home-content">
@@ -123,9 +129,8 @@
             
           </div>
           <i class='bx bx-cart-alt cart'></i>
-          
-        </div>
-        
+      </div>
+
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Volunteers</div>
@@ -134,8 +139,26 @@
           <i class='bx bx-cart-alt cart'></i>
           
         </div>
+
+        <div class="box">
+          <div class="left-side">
+            <div class="box-topic">Food Available</div>
+            <div class="number">{{no_food[0].0}}</div>
+          </div>
+          <i class='bx bx-cart-alt cart'></i>
+          
+        </div>  
+      
+      <div class="box">
+        <div class="left-side">
+          <div class="box-topic">Total Requests</div>
+          <div class="number">{{no_req[0].0}}</div>
+        </div>
+        <i class='bx bx-cart-alt cart'></i>
+        
+      </div>
       {% endblock %}
-       
+    </div> 
   </section>
 
 

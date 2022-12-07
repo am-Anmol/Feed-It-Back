@@ -2,7 +2,7 @@ DROP SCHEMA IF EXISTS fib;
 create database fib;
 use fib;
 
-create table admins (
+create table Admins (
 admin_id int primary key auto_increment,
 admin_name varchar(255),
 email varchar(255),
@@ -27,7 +27,9 @@ v_name varchar(255),
 v_location varchar(255),
 v_contact_number bigint(10),
 email varchar(255),
-vl_password varchar(255)
+vl_password varchar(255),
+vl_cause varchar(255),
+vl_acc_status varchar(20) default 'Not Verified'
 );
 
 
@@ -64,7 +66,7 @@ d_id int
 
 
 
-CREATE TABLE volunteer_request
+CREATE TABLE Volunteer_Request
 (
 requestId int PRIMARY KEY auto_increment,
 status varchar(255),
@@ -109,13 +111,4 @@ delimiter ;
 --  insert food_del values(old.foodid,old.food_qty,old.food_cat,old.f_status,old.pickup_location,old.created_time,old.duration_time,old.d_id);//
 -- delimiter ;
 
-delimiter //
-create trigger updatestatus after update on volunteer_request
-for each row 
- update food_added set f_status=new.status where foodid=old.foodId;//
-delimiter ;
-
 insert into admins values (1,'admin 1','admin@test.com','admin@1234');
-
-Select * from food_added where foodid =2;
-Delete from food_added where foodid = 2 and d_id = 1;
