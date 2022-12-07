@@ -203,25 +203,18 @@ table.table td .add {
                     <th scope="col">Pickup</th>
                     <th scope="col">Food Delivered Time</th>
                     <th scope="col">Duration</th>
-                    <th scope="col">DeliveryId</th>
                   </tr>
               </thead>
               <tbody>
-                  {% for row in receiver %}
+                  {% for row in food_available %}
               <tr>
-                  <td scope="row">{{row.0}}</td>
+                <td scope="row">{{row.0}}</td>
                 <td scope="row">{{row.1}}</td>
                 <td scope="row">{{row.2}}</td>
                 <td scope="row">{{row.3}}</td>
                 <td scope="row">{{row.4}}</td>
                 <td scope="row">{{row.5}}</td>
                 <td scope="row">{{row.6}}</td>
-                <td scope="row">{{row.7}}</td>
-                  <td>
-                             
-                      <a class="edit" title="Edit" data-toggle="tooltip" href="/edit_receiver/{{row[0]}}"><i class="material-icons">&#xE254;</i></a>
-                      <a class="delete" title="Delete" data-toggle="tooltip" href="/delete_receiver/{{row[0]}}"><i class="material-icons">&#xE872;</i></a>
-                  </td>
               </tr>
               {%endfor%}
                 
