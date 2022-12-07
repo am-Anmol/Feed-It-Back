@@ -149,14 +149,20 @@ table.table td .add {
         </nav>
 
         <!-- table starts -->
-
+    
 
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
                     <div class="col-lg-8"><h2>Food <b>Details</b></h2></div>
-                    
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                      <div class=" hint-text text-danger">
+                          {{ messages[0] }}
+                      </div>
+                    {% endif %}
+                {% endwith %}                
                 </div>
             </div>
             <table class="table table-bordered">
@@ -169,18 +175,24 @@ table.table td .add {
                         <th scope="col">Address</th>
                         <th scope="col">Listing Date</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                   {% for row in fd %}
                   <tr>
-                      <td scope="row">{{row.0}}</td>
+                      <td scope="row">{{loop.index}}</td>
                       <td scope="row">{{dname[0].0}}</td>
                       <td scope="row">{{row.1}}</td>
                       <td scope="row">{{row.2}}</td>
                       <td scope="row">{{row.4}}</td>
                       <td scope="row">{{row.5}}</td>
                       <td scope="row">{{row.3}}</td>
+                      <td>
+                           
+                        <a class="edit" title="Edit" data-toggle="tooltip" href="/editfood/{{row[0]}}"><i class="material-icons">&#xE254;</i></a>
+                        <a class="delete" title="Delete" data-toggle="tooltip" href="/deletefood/{{row[0]}}"><i class="material-icons">&#xE872;</i></a>
+                    </td>
                     </tr>
                     {%endfor%}
                   
