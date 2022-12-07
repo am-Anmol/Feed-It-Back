@@ -74,11 +74,7 @@
               <div class="form-style-2">
                 <form action="/add_request/{{fid}}/{{did}}" method="post">
                     <label for="receiver"><span>Drop Location <span class="required">*</span></span>
-                        <select name="receiver" class="select-field" required>
-                            {% for row in receiver %}
-                            <option value={{row.0}}>{{row.1}}</option>
-                            {%endfor%}
-                        </select>
+                      <input type="text" class="input-field"  name="address" required>
                     </label>
                     <label for="status"><span>Status</span>
                         <select name="status" class="select-field" required>

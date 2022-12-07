@@ -158,7 +158,6 @@ table.table td .add {
                           <th scope="col">Pickup Location</th>
                           <th scope="col">Donor Contact</th>
                           <th scope="col">Drop Location</th>
-                          <th scope="col">Receiver Contact</th>
                           <th scope="col">Status</th>
                           <th scope="col">Images</th>
                           <th scope="col">Update Status</th>
@@ -168,11 +167,11 @@ table.table td .add {
                     <tbody>
                       {% for row in req %}
                       <tr>
-                        <td scope="row">{{row.10}}</td>
-                        <td scope="row">{{row.11}}</td>
-                        <td scope="row">{{row.12}}</td>
                         <td scope="row">{{row.8}}</td>
                         <td scope="row">{{row.9}}</td>
+                        <td scope="row">{{row.10}}</td>
+                        <td scope="row">{{row.4}}</td>
+                        
                         <td scope="row">{{row.1}}</td>
                         <td scope="row">
                           {% if row.1 == 'delivered' %}

@@ -72,11 +72,10 @@ requestId int PRIMARY KEY auto_increment,
 status varchar(255),
 foodId int ,
 donorId int ,
-recieverId int ,
+recieveraddress varchar(255) ,
 volunteerId int ,
 FOREIGN KEY (foodId) REFERENCES food_added(foodid),
 FOREIGN KEY (donorId) REFERENCES donor(donor_id),
-FOREIGN KEY (recieverId) REFERENCES reciever(reciever_id),
 FOREIGN KEY (volunteerId) REFERENCES volunteer(volunteer_id)
 );
 

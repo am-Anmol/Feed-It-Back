@@ -12,10 +12,10 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
 
-app.config['MYSQL_PASSWORD'] = 'G@nesh24'#password G@nesh24
+app.config['MYSQL_PASSWORD'] = '1234'#password G@nesh24
 
 
-app.config['MYSQL_DB'] = '1234'#database name
+app.config['MYSQL_DB'] = 'fib'#database name
 
 mysql = MySQL(app)
 
@@ -243,6 +243,16 @@ def deletefood(id):
     cursor.close()
     return render_template('managefooddo.html', **locals())
 
+@app.route("/volunteer_details/<int:id>", methods=["POST", "GET"])
+def volunteer_details(id):
+    if not check_type("donor"):
+        return redirect(url_for("login"))
+    cur=mysql.connection.cursor()
+    cur.execute('select * from food_added f left join volunteer_request r on f.foodid=r.foodId where f.foodid = %s',(id,))
+    req=cur.fetchone()
+    cur.execute("select * from volunteer where volunteer_id = %s",(req[-2],))
+    vol=cur.fetchone()        
+    return render_template("volunteer_details.html",req=req,vol=vol)
 
 
 @app.route("/addfood", methods=['GET', 'POST'])
@@ -288,6 +298,7 @@ def requestfood():
     cur=mysql.connection.cursor()
     cur.execute('select * from food_added f left join volunteer_request r on f.foodid=r.foodId order by f.created_time desc')
     food=cur.fetchall()
+    print(food)
     return render_template('RequestFood.html',food=food)
 
 @app.route("/adminhome")
@@ -423,6 +434,8 @@ def add_receiver():
         #flash = 'Receiver Successfully Added !'
         return redirect(url_for("admindashboard"))
 
+
+
 @app.route("/edit_receiver/<int:id>", methods=["POST", "GET"])
 def updatereceivers(id):
     if not check_type("admin"):
@@ -465,27 +478,24 @@ def viewreceivers():
 
 @app.route("/addrequest/<int:fid>/<int:did>", methods=["POST", "GET"])
 def addrequest(fid,did):
-    cur=mysql.connection.cursor()
-    cur.execute('select * from reciever')
-    receiver=cur.fetchall()
-    return render_template("add_request.html",receiver=receiver,fid=fid,did=did)
+    return render_template("add_request.html",fid=fid,did=did)
 
 @app.route("/add_request/<int:fid>/<int:did>", methods=["POST", "GET"])
 def add_request(fid,did):
     cur=mysql.connection.cursor()
     if request.method == 'POST':
-        recev = request.form['receiver']
+        recev = request.form['address']
         status = request.form['status']
-        cur.execute('Insert into volunteer_request(status, foodId, donorId, recieverId, volunteerId) values(%s,%s,%s,%s,%s)',(status,fid,did,recev,session['id']))
+        cur.execute('Insert into volunteer_request(status, foodId, donorId, recieveraddress, volunteerId) values(%s,%s,%s,%s,%s)',(status,fid,did,recev,session['id']))
+        cur.execute("Update food_added set f_status = 'booked' where foodid = %s",(fid,))
         mysql.connection.commit()
         cur.close()
         return redirect('/requestfood')
-    
 
 @app.route("/myrequest", methods=["POST", "GET"])
 def myrequest():
     cur=mysql.connection.cursor()
-    cur.execute('select * from volunteer_request join reciever on recieverId=reciever_id join donor on donorId=donor_id where volunteerId=%s order by requestId desc',(session['id'],))
+    cur.execute('select * from volunteer_request join  donor on donorId=donor_id where volunteerId=%s order by requestId desc',(session['id'],))
     req=cur.fetchall()        
     return render_template("myrequest.html",req=req)
 

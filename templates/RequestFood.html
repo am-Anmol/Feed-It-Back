@@ -180,14 +180,14 @@ table.table td .add {
                         <td scope="row">{{row.6}}</td>
                         <td scope="row">{{row.3}}</td>
                         <td scope="row">
-                          {% if row.8 %}
+                          {% if row.10 %}
                           Booked
                           {% else %}
                           Not booked
                           {% endif %}
                         </td>
                         <td scope="row">
-                          {% if row.8 %}
+                          {% if row.10 %}
                           <a class="request" title="request" data-toggle="tooltip" disabled>Request</a>
                           {% else %}
                           <a class="request" title="request" data-toggle="tooltip" href="/addrequest/{{row[0]}}/{{row[7]}}">Request</a>

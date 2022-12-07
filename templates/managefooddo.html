@@ -169,13 +169,14 @@ table.table td .add {
                 <thead>
                     <tr>
                         <th scope="col">S.No.</th>
-                        <th scope="col">Donor Name</th>
+                        <!-- <th scope="col">Donor Name</th> -->
                         <th scope="col">Food Quantity</th>
                         <th scope="col">Category</th>
                         <th scope="col">Address</th>
                         <th scope="col">Listing Date</th>
                         <th scope="col">Status</th>
                         <th scope="col">Images</th>
+                        <th scope="col">Volunteer Detials</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -183,7 +184,7 @@ table.table td .add {
                   {% for row in fd %}
                   <tr>
                       <td scope="row">{{loop.index}}</td>
-                      <td scope="row">{{dname[0].0}}</td>
+                      <!-- <td scope="row">{{dname[0].0}}</td> -->
                       <td scope="row">{{row.1}}</td>
                       <td scope="row">{{row.2}}</td>
                       <td scope="row">{{row.4}}</td>
@@ -191,6 +192,13 @@ table.table td .add {
                       <td scope="row">{{row.3}}</td>
                       <td scope="row">
                         <img src="static/donorimages/{{row.8}}" alt="loading" width="80" height="90">  
+                      </td>
+                      <td>
+                        {% if row.3 == "booked" %}
+                          <a href = "/volunteer_details/{{row.0}}">Veiw Details</a> 
+                        {% else %}
+                          yet to be booked
+                        {% endif %} 
                       </td>
                       <td>
                            
