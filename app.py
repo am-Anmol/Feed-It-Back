@@ -10,7 +10,7 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
 
-app.config['MYSQL_PASSWORD'] = '1234'#password G@nesh24
+app.config['MYSQL_PASSWORD'] = 'Raghu@2000'#password G@nesh24
 
 
 app.config['MYSQL_DB'] = 'fib'#database name
@@ -220,11 +220,14 @@ def vhome():
         return redirect(url_for("login"))
     return render_template('homevo.html')
 
-@app.route("/volunteerdashboard")
+@app.route("/volunteerdashboard", methods=['GET','POST'])
 def volunteerdashboard():
+    cursor=mysql.connection.cursor()
+    cursor.execute('SELECT count(*) FROM volunteer')
+    no_vol=cursor.fetchall()
     if not check_type("volunteer"):
         return redirect(url_for("login"))
-    return render_template('dashvo.html')
+    return render_template('dashvo.html', no_vol=no_vol)
 
 @app.route("/requestfood", methods=['GET', 'POST'])
 def requestfood():

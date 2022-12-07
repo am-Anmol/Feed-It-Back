@@ -140,6 +140,9 @@ h6{
     color: #333333;
     font-weight: 700;
 }
+h4{
+    font-weight: bold !important;
+}
 img{
     width: 100%;
     height: auto;
@@ -197,6 +200,7 @@ img{
 }
 .team{
     margin-bottom:30px ;
+    
 }
 .team .team-img{
     position: relative;
@@ -216,6 +220,8 @@ img{
     text-align: center;
     background:#819bd1;
     border-radius: 10px;
+    box-shadow: 5px 5px 10px 10px rgb(69, 68, 68);
+
 }
 .team .team-content h2{
 font-size: 25px;
