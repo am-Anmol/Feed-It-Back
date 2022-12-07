@@ -195,6 +195,28 @@ def donormanage():
     cursor.close()
     return render_template('managefooddo.html', fd=fd,dname=dname)
 
+@app.route("/editfooddonor/<int:id>", methods=["GET", "POST"])
+def editfood(id):
+    if not check_type("donor"):
+        return redirect(url_for("login"))
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM food_added where foodid = %s',(id,))
+    fd=cursor.fetchall()
+    if request.method == "POST":
+        f_qty = request.form['foodqty']
+        category = request.form['category']  
+        location = request.form['pickuploc']
+        duration = request.form['duration']
+        status = request.form['status']
+        cursor.execute("Update food_added set food_qty = %s, food_cat= %s, f_status = %s, pickup_location = %s,duration_time = %s ",
+        (f_qty, category, location, duration, status))
+
+        return redirect(url_for("donormanage"))
+    
+    return render_template("editfood.html", **locals())
+
+
+
 @app.route("/addfood", methods=['GET', 'POST'])
 def addfood():
     if not check_type("donor"):
