@@ -82,6 +82,7 @@ def volunteer_reg():
     email = request.form['email']
     password = request.form['password']
     cnf_password = request.form['confirm_password']
+    cause = request.form['cause']
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM volunteer WHERE email = % s', (email, ))
     account = cursor.fetchone()
@@ -101,8 +102,8 @@ def volunteer_reg():
         flash("Password don't Match")
         return redirect(url_for("vregister"))
     else:
-        cursor.execute('INSERT INTO volunteer(v_name, v_location, v_contact_number, email, vl_password) VALUES (%s, %s, %s, %s, %s)', 
-                (fullname, location, phoneno, email, password))
+        cursor.execute('INSERT INTO volunteer(v_name, v_location, v_contact_number, email, vl_password, vl_cause) VALUES (%s, %s, %s, %s, %s, %s)', 
+                (fullname, location, phoneno, email, password, cause))
         mysql.connection.commit()
         #flash = 'You have successfully registered !'
         return redirect(url_for("login"))
@@ -230,11 +231,11 @@ def vhome():
 @app.route("/volunteerdashboard", methods=['GET','POST'])
 def volunteerdashboard():
     cursor=mysql.connection.cursor()
-    cursor.execute('SELECT count(*) FROM volunteer')
-    no_vol=cursor.fetchall()
+    cursor.execute('SELECT count(*) FROM donor')
+    no_don=cursor.fetchall()
     if not check_type("volunteer"):
         return redirect(url_for("login"))
-    return render_template('dashvo.html', no_vol=no_vol)
+    return render_template('dashvo.html', no_don=no_don)
 
 @app.route("/requestfood", methods=['GET', 'POST'])
 def requestfood():
@@ -258,10 +259,14 @@ def admindashboard():
     cur=mysql.connection.cursor()
     cur.execute('select count(*) from donor')
     no_donors=cur.fetchall()
+    cur.execute('select count(*) from food_added')
+    no_food=cur.fetchall()
     cur.execute('select count(*) from volunteer')
     no_volunteers=cur.fetchall()
+    cur.execute('select count(*) from volunteer_request')
+    no_req=cur.fetchall()
     cur.close()
-    return render_template('dashadmin.html',no_donors=no_donors, no_volunteers=no_volunteers)
+    return render_template('dashadmin.html',no_donors=no_donors,no_food=no_food, no_volunteers=no_volunteers,no_req=no_req)
 
 @app.route("/view_donors", methods=['GET', 'POST'])
 def viewdonors():
