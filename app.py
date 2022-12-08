@@ -12,7 +12,7 @@ app.secret_key = "4db8ghfhb51a4017e427f3ea5c2137c450f767dce1bf"
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
 
-app.config['MYSQL_PASSWORD'] = '1234'#password G@nesh24
+app.config['MYSQL_PASSWORD'] = 'G@nesh24'#password G@nesh24
 
 
 app.config['MYSQL_DB'] = 'fib'#database name
